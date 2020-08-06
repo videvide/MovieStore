@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using MovieStore.Lib.Models;
 using MovieStore.Web.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -66,7 +68,7 @@ namespace MovieStore.Web.Controllers
             return View(customers);
         }
 
-        // Admin/Customers/ID
+        // GET: Admin/Customers/ID
         public ActionResult CustomerDetails(int id)
         {
             var customer = _context.Customers.FirstOrDefault(c => c.Id == id);
@@ -74,11 +76,26 @@ namespace MovieStore.Web.Controllers
             return View(customer);
         }
 
+        // GET: Admin/EditCustomer/ID
         public ActionResult EditCustomer(int id)
         {
             var user = _context.Customers.FirstOrDefault(c => c.Id == id);
 
             return View(user);
+        }
+
+        // POST: Admin/EditCustomer/CustomerData
+        [HttpPost]
+        public ActionResult EditCustomer([Bind(Include = "Id,FirstName,LastName,BillingAddress,BillingZip,BillingCity,DeliveryAddress,DeliveryZip,DeliveryCity,EmailAddress,PhoneNo")] Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Entry(customer).State = EntityState.Modified;
+                _context.SaveChanges();
+                return RedirectToAction("CustomerDetails", new { id = customer.Id });
+            }
+
+            return View(customer);
         }
     }
 }
