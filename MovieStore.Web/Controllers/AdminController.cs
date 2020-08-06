@@ -73,5 +73,12 @@ namespace MovieStore.Web.Controllers
 
             return View(customer);
         }
+
+        public ActionResult EditCustomer(int id)
+        {
+            var user = _context.Customers.FirstOrDefault(c => c.Id == id);
+
+            return View(user);
+        }
     }
 }
