@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace MovieStore.Web.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -55,6 +56,22 @@ namespace MovieStore.Web.Controllers
             }
 
             return View(userRoleList);
+        }
+
+        // GET: Admin/Customers
+        public ActionResult Customers()
+        {
+            var customers = _context.Customers.ToList();
+
+            return View(customers);
+        }
+
+        // Admin/Customers/ID
+        public ActionResult CustomerDetails(int id)
+        {
+            var customer = _context.Customers.FirstOrDefault(c => c.Id == id);
+
+            return View(customer);
         }
     }
 }
