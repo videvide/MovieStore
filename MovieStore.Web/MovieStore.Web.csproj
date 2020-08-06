@@ -255,6 +255,7 @@
     <Content Include="Views\Customer\Index.cshtml" />
     <Content Include="Views\Admin\Roles.cshtml" />
     <Content Include="Views\Admin\Customers.cshtml" />
+    <Content Include="Views\Admin\CustomerDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MovieStore.Lib\MovieStore.Lib.csproj">
