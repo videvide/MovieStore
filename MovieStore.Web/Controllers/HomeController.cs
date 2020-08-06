@@ -15,7 +15,7 @@ namespace MovieStore.Web.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "This website was created in the summer of 2020 during our 1st group project at Lexicon, Linköping.";
 
             return View();
         }
