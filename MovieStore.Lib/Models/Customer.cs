@@ -27,7 +27,7 @@ namespace MovieStore.Lib.Models
         public string BillingCity { get; set; }
 
         [DataType(DataType.PostalCode)]
-        public int BillingZip { get; set; }
+        public string BillingZip { get; set; }
 
         [MaxLength(255)]
         public string DeliveryAddress { get; set; }
