@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using MovieStore.Lib.Models;
 using MovieStore.Web.Models;
 
 namespace MovieStore.Web.Controllers
@@ -17,9 +18,11 @@ namespace MovieStore.Web.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private readonly ApplicationDbContext _context;
 
         public AccountController()
         {
+            _context = new ApplicationDbContext();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -152,9 +155,18 @@ namespace MovieStore.Web.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var customer = new Customer 
+                { 
+                    FirstName = model.FirstName, 
+                    LastName = model.LastName,
+                    EmailAddress = model.Email,
+                    PhoneNo = model.PhoneNo                   
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    _context.Customers.Add(customer);
+                    _context.SaveChanges();
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
