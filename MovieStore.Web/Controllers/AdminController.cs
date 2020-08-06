@@ -27,6 +27,8 @@ namespace MovieStore.Web.Controllers
             return View();
         }
 
+        #region Role Actions
+
         // GET: Admin/Roles
         public ActionResult Roles()
         {
@@ -59,6 +61,10 @@ namespace MovieStore.Web.Controllers
 
             return View(userRoleList);
         }
+
+        #endregion Role Actions
+
+        #region Customer Actions
 
         // GET: Admin/Customers
         public ActionResult Customers()
@@ -97,5 +103,7 @@ namespace MovieStore.Web.Controllers
 
             return View(customer);
         }
+
+        #endregion Customer Actions
     }
 }
