@@ -1,0 +1,18 @@
+﻿@model  List<MovieStore.Web.Models.UserRoleViewModel>
+
+@{
+    ViewBag.Title = "Roles";
+}
+
+<h2>Roles</h2>
+
+@foreach (var roles in Model)
+{
+    <h4>@roles.Role.Name</h4>
+    foreach (var user in roles.Role.Users)
+    {
+        <p>@user.Email</p>
+    }
+}
+
+@Html.ActionLink("Back to Admin Page", "Index")

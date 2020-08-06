@@ -24,14 +24,37 @@ namespace MovieStore.Web.Controllers
             return View();
         }
 
-        public void AddToAdmin()
+        // GET: Admin/Roles
+        public ActionResult Roles()
         {
             var roles = _context.Roles.ToList();
 
+            List<UserRoleViewModel> userRoleList = new List<UserRoleViewModel>();
+
             foreach (var role in roles)
             {
-                Response.Write($"Role: {role.Name}<br/>");
+                List<IdentityUser> userList = new List<IdentityUser>();
+
+                foreach (var user in role.Users)
+                {
+                    var usr = _context.Users.FirstOrDefault(us => us.Id == user.UserId);
+
+                    userList.Add(usr);
+                }
+
+                var u = new UserRoleViewModel
+                {
+                    Role = new RoleModel
+                    {
+                        Name = role.Name,
+                        Users = userList
+                    }
+                };
+
+                userRoleList.Add(u);
             }
+
+            return View(userRoleList);
         }
     }
 }
