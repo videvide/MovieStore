@@ -1,10 +1,14 @@
 ﻿@model MovieStore.Lib.Models.Movie
 
-<div class="card col-lg-3 col-md-4 col-sm-6 my-4 text-center">
+<div class="card bg-dark text-light col-lg-3 col-md-4 col-sm-6 my-4 py-4">
     <img class="card-img-top" style="max-height: 22rem;" src="@Model.Poster" alt="Card image cap">
     <div class="card-body">
-        <h5 class="card-title">@Model.Title <span class="badge badge-warning">@Model.ImdbRating</span></h5>
+        <h5 class="card-title">@Model.Title</h5>
+        <h6 class="card-subtitle mb-2 text-muted">IMDb Rating <span class="badge badge-warning">@Model.ImdbRating</span></h6>
         <p class="card-text">@Model.Plot</p>
-        <a href="#" class="btn btn-primary d-block position-relative" style="bottom: 0;">Add to cart</a>
+    </div>
+    <div class="card-footer bg-dark">
+        <a href="#" class="btn btn-outline-warning float-left">Add to cart</a>
+        <a href="#" class="btn btn-outline-warning float-right">Details</a>
     </div>
 </div>
