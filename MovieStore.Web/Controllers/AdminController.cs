@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using Microsoft.Ajax.Utilities;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using MovieStore.Lib.DataAccess;
 using MovieStore.Lib.Models;
 using MovieStore.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -105,5 +108,52 @@ namespace MovieStore.Web.Controllers
         }
 
         #endregion Customer Actions
+
+        #region Movie Action
+
+        public async Task<ActionResult> UpdateMovies()
+        {
+            await UpdateMovieSet(_context);
+
+            return View();
+        }
+
+        public async Task UpdateMovieSet(MovieStore.Web.Models.ApplicationDbContext context)
+        {
+            var dataAccess = new OMDBDataAccess();
+            var data = await dataAccess.GetTop100Movies();
+
+            await context.Movies.ForEachAsync(m =>
+            {
+                context.Movies.Remove(m);
+            });
+            context.SaveChanges();
+
+            foreach (var movie in data)
+            {
+                context.Movies.Add(movie);
+                context.SaveChanges();
+            }
+            var updateDate = new MovieUpdateHistory
+            {
+                LastUpdate = DateTime.Now
+            };
+
+            var existingDate = context.MovieUpdateHistory.ToList();
+
+            if (existingDate.Count < 1)
+            {
+                context.MovieUpdateHistory.Add(updateDate);
+            }
+            else
+            {
+                existingDate[0].LastUpdate = DateTime.Now;
+                context.Entry(existingDate[0]).State = EntityState.Modified;
+            }
+
+            context.SaveChanges();
+        }
+
+        #endregion
     }
 }
