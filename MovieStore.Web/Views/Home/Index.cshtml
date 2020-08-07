@@ -5,3 +5,12 @@
 <div class="jumbotron">
     <h1>Movie Store</h1>
 </div>
+
+@if (string.IsNullOrEmpty(ViewBag.Error))
+{
+    @ViewBag.MovieData
+}
+else
+{
+    <p>@ViewBag.Error</p>
+}
