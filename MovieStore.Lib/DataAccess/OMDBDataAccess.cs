@@ -82,8 +82,14 @@ namespace MovieStore.Lib.DataAccess
                 {
                     Title = m.Title,
                     Director = m.Director,
-                    Price = 0,
-                    ReleaseYear = m.Year
+                    Price = 199,
+                    ReleaseYear = m.Year,
+                    Genre = m.Genre,
+                    ImdbID = m.imdbID,
+                    ImdbRating = m.imdbRating,
+                    Plot = m.Plot,
+                    Poster = m.Poster,
+                    Rated = m.Rated
                 };
 
                 output.Add(movie);
