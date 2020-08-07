@@ -48,6 +48,7 @@
     <Compile Include="DataAccess\OMDBDataAccess.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Movie.cs" />
+    <Compile Include="Models\MovieIdsResponse.cs" />
     <Compile Include="Models\MovieResponse.cs" />
     <Compile Include="Models\OrderRows.cs" />
     <Compile Include="Models\Order.cs" />
