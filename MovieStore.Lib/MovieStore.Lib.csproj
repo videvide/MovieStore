@@ -50,6 +50,7 @@
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Models\MovieIdsResponse.cs" />
     <Compile Include="Models\MovieResponse.cs" />
+    <Compile Include="Models\MovieUpdateHistory.cs" />
     <Compile Include="Models\OrderRows.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

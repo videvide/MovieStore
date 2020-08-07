@@ -196,6 +196,10 @@
     <Compile Include="Migrations\202008061720212_Updated-billing-zip-datatype-to-string.Designer.cs">
       <DependentUpon>202008061720212_Updated-billing-zip-datatype-to-string.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202008071030596_added-movie-update-history-table.cs" />
+    <Compile Include="Migrations\202008071030596_added-movie-update-history-table.designer.cs">
+      <DependentUpon>202008071030596_added-movie-update-history-table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -393,6 +397,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202008061720212_Updated-billing-zip-datatype-to-string.resx">
       <DependentUpon>202008061720212_Updated-billing-zip-datatype-to-string.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008071030596_added-movie-update-history-table.resx">
+      <DependentUpon>202008071030596_added-movie-update-history-table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
