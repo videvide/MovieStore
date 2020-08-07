@@ -1,4 +1,5 @@
 ﻿using MovieStore.Lib.DataAccess;
+using MovieStore.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,15 +12,21 @@ namespace MovieStore.Web.Controllers
     public class HomeController : Controller
     {
         private readonly OMDBDataAccess _movieAccess;
+        private readonly ApplicationDbContext _context;
 
         public HomeController()
         {
             _movieAccess = new OMDBDataAccess();
+            _context = new ApplicationDbContext();
         }
 
         public ActionResult Index()
         {
-            return View();
+            var movies = _context.Movies.ToList();
+
+            ViewBag.Movies = movies.Take(10).ToList();
+
+            return View(movies.Take(10).ToList());
         }
 
         public ActionResult About()

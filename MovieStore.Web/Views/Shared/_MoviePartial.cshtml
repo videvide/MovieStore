@@ -1,0 +1,10 @@
+﻿@model MovieStore.Lib.Models.Movie
+
+<div class="card col-lg-3 col-md-4 col-sm-6 my-4 text-center">
+    <img class="card-img-top" style="max-height: 22rem;" src="@Model.Poster" alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Title <span class="badge badge-warning">@Model.ImdbRating</span></h5>
+        <p class="card-text">@Model.Plot</p>
+        <a href="#" class="btn btn-primary d-block position-relative" style="bottom: 0;">Add to cart</a>
+    </div>
+</div>
