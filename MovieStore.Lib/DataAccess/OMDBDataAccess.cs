@@ -35,7 +35,7 @@ namespace MovieStore.Lib.DataAccess
         }
         public async Task<MovieResponse> GetMovieById(string id)
         {
-            var result = await _client.GetAsync($"{API_URI}i={id}");
+            var result = await _client.GetAsync($"{API_URI}i={id}&plot=full");
             if (result.IsSuccessStatusCode)
             {
                 var r = await result.Content.ReadAsStringAsync();
@@ -88,12 +88,19 @@ namespace MovieStore.Lib.DataAccess
                     ImdbID = m.imdbID,
                     ImdbRating = m.imdbRating,
                     Plot = m.Plot,
-                    Poster = m.Poster,
+                    Poster = FixPosterURL(m.Poster),
                     Rated = m.Rated
                 };
 
                 output.Add(movie);
             }
+
+            return output;
+        }
+
+        private string FixPosterURL(string url)
+        {
+            string output = url.Replace("_SX300.jpg", "_.jpg");
 
             return output;
         }
