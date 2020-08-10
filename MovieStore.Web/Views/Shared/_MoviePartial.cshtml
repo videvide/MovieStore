@@ -5,7 +5,21 @@
     <div class="card-body">
         <h5 class="card-title">@Model.Title</h5>
         <h6 class="card-subtitle mb-2 text-muted">IMDb Rating <span class="badge badge-warning">@Model.ImdbRating</span></h6>
-        <p class="card-text">@Model.Plot</p>
+        <p class="card-text">
+            @if (Model.Plot.Length > 150)
+            {
+                <span>
+                    @Model.Plot.Substring(0, 150)...
+                </span>
+                <span class="badge badge-pill badge-secondary">
+                    @Html.ActionLink("Read More", "Details", "Movies", new { id = Model.Id }, new { @class = "text-decoration-none text-light   " })
+                </span>
+            }
+            else
+            {
+                @Model.Plot
+            }
+        </p>
         <h6 class="card-subtitle mb-2 text-muted">Genres: <span class="badge badge-warning">@Model.Genre</span></h6>
         <h6 class="card-subtitle mb-2 text-muted">Rated: <span class="badge badge-warning">@Model.Rated</span></h6>
     </div>
