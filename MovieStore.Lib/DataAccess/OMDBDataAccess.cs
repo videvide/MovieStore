@@ -21,7 +21,7 @@ namespace MovieStore.Lib.DataAccess
 
         public async Task<MovieResponse> GetMovieByTitle(string title)
         {
-            var result = await _client.GetAsync($"{API_URI}t={title}");
+            var result = await _client.GetAsync($"{API_URI}t={title}&plot=full");
             if (result.IsSuccessStatusCode)
             {
                 var r = await result.Content.ReadAsStringAsync();
