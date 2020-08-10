@@ -1,0 +1,83 @@
+﻿@model  List<MovieStore.Web.Models.UserRoleViewModel>
+
+@{
+    ViewBag.Title = "Roles";
+}
+
+<style>
+    .hidden {
+        display: none;
+    }
+</style>
+
+<h2 class="text-center">Roles</h2>
+
+<div class="row row-cols-1 justify-content-center align-items-center">
+    <select id="roleSelector" class="mb-4">
+        <option></option>
+        @foreach (var roles in Model)
+        {
+            <option value="@roles.Role.Name">
+                @*<h4>@roles.Role.Name</h4>
+                    <select>
+                        @foreach (var user in roles.Role.Users)
+                        {
+                            <option>@user.Email</option>
+                        }
+                    </select>*@
+
+                @roles.Role.Name
+            </option>
+        }
+    </select>
+    @foreach (var role in Model)
+    {
+        <table class="hidden roleDisplay table" id="@role.Role.Name">
+            <tr>
+                <th>
+                    Email Address
+                </th>
+                <th>
+                    ID
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var user in role.Role.Users)
+            {
+                <tr>
+                    <td>
+                        @user.Email
+                    </td>
+                    <td>
+                        @user.Id
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+</div>
+
+<div class="mt-4 text-center">
+    @Html.ActionLink("Back to Admin Page", "Index")
+</div>
+
+<script>
+    document.getElementById("roleSelector").addEventListener("change", (e) => {
+        let selectedItem = e.currentTarget.options[e.currentTarget.selectedIndex].text
+        let roleDisplayElement = document.querySelectorAll(".roleDisplay");
+
+        roleDisplayElement.forEach(e => {
+            if (!e.classList.contains("hidden")) {
+                e.classList.add("hidden");
+            }
+        });
+
+        if (selectedItem != "") {
+            let element = document.getElementById(selectedItem);
+            if (element != null) {
+                element.classList.toggle("hidden");
+            }
+        }
+    });
+</script>

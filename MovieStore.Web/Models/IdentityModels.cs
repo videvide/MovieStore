@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -30,6 +31,7 @@ namespace MovieStore.Web.Models
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderRows> OrderRows { get; set; }
+        public DbSet<MovieUpdateHistory> MovieUpdateHistory { get; set; }
 
         public static ApplicationDbContext Create()
         {

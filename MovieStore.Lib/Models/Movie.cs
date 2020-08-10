@@ -22,5 +22,21 @@ namespace MovieStore.Lib.Models
         [Required]
         [DataType(DataType.Currency)]
         public decimal Price { get; set; }
+        [Required]
+        [MaxLength(100)]
+        public string Rated { get; set; }
+        [Required]
+        [MaxLength(100)]
+        public string Genre { get; set; }
+        [Required]
+        [MaxLength(255)]
+        public string Plot { get; set; }
+        [Required]
+        [MaxLength(255)]
+        public string Poster { get; set; }
+        [Required]
+        public float ImdbRating { get; set; }
+        [Required]
+        public string ImdbID { get; set; }
     }
 }

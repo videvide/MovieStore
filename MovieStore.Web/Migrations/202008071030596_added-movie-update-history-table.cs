@@ -1,0 +1,26 @@
+﻿namespace MovieStore.Web.Migrations
+{
+    using System;
+    using System.Data.Entity.Migrations;
+    
+    public partial class addedmovieupdatehistorytable : DbMigration
+    {
+        public override void Up()
+        {
+            CreateTable(
+                "dbo.MovieUpdateHistories",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        LastUpdate = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+        }
+        
+        public override void Down()
+        {
+            DropTable("dbo.MovieUpdateHistories");
+        }
+    }
+}
