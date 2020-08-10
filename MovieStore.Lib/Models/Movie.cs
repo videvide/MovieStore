@@ -29,7 +29,6 @@ namespace MovieStore.Lib.Models
         [MaxLength(100)]
         public string Genre { get; set; }
         [Required]
-        [MaxLength(255)]
         public string Plot { get; set; }
         [Required]
         [MaxLength(255)]
