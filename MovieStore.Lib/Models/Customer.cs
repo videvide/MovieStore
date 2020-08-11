@@ -44,5 +44,8 @@ namespace MovieStore.Lib.Models
 
         [Phone]
         public string PhoneNo { get; set; }
+
+        public string ApplicationUserId { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
     }
 }

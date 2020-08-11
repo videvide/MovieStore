@@ -210,6 +210,10 @@
     <Compile Include="Migrations\202008101304534_Update-Plot-Max-Characters.designer.cs">
       <DependentUpon>202008101304534_Update-Plot-Max-Characters.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202008111728303_Add-AppUser-FK-to-Customer.cs" />
+    <Compile Include="Migrations\202008111728303_Add-AppUser-FK-to-Customer.designer.cs">
+      <DependentUpon>202008111728303_Add-AppUser-FK-to-Customer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -393,6 +397,7 @@
     <Content Include="Views\Shared\_ShopingCartPartial.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\Shared\_MovieCartPartial.cshtml" />
+    <Content Include="Views\Customer\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MovieStore.Lib\MovieStore.Lib.csproj">
@@ -426,6 +431,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202008101304534_Update-Plot-Max-Characters.resx">
       <DependentUpon>202008101304534_Update-Plot-Max-Characters.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202008111728303_Add-AppUser-FK-to-Customer.resx">
+      <DependentUpon>202008111728303_Add-AppUser-FK-to-Customer.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
