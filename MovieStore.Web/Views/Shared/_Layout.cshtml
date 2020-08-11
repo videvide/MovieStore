@@ -20,6 +20,7 @@
                 <li class="nav-item">@Html.ActionLink("About", "About", "Home", new { }, new { @class = "nav-link" })</li>
                 <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Home", new { }, new { @class = "nav-link" })</li>
             </ul>
+            @Html.Partial("_ShopingCartPartial")
             @Html.Partial("_LoginPartial")
         </div>
     </nav>
@@ -32,6 +33,7 @@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/popper")
     @Scripts.Render("~/bundles/bootstrap")
     <script src="https://kit.fontawesome.com/b99a277209.js" crossorigin="anonymous"></script>
     @RenderSection("scripts", required: false)

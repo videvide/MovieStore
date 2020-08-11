@@ -23,8 +23,50 @@
         <h6 class="card-subtitle mb-2 text-muted">Genres: <span class="badge badge-warning">@Model.Genre</span></h6>
         <h6 class="card-subtitle mb-2 text-muted">Rated: <span class="badge badge-warning">@Model.Rated</span></h6>
     </div>
-    <div class="card-footer bg-dark">
-        <a href="#" class="btn btn-outline-warning float-left">Add to cart</a>
-        @Html.ActionLink("Details", "Details", "Movies", new { id = Model.Id }, new { @class = "btn btn-outline-warning float-right" })
-    </div>
+    @using (Html.BeginForm("AddToCart", "Cart", FormMethod.Post, new { id = "addToCartForm" + Model.Id, @class = "navbar-nav navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+        <input name="movieId" type="hidden" value="@Model.Id" />
+
+        <div class="card-footer bg-dark">
+            @*<input type="submit" class="btn btn-outline-warning float-left" id="addToCartSubmit@(Model.Id)" value="Add to cart" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-content="Added to cart!" />*@
+            <a tabindex="0" id="addToCartSubmit@(Model.Id)" class="btn btn-outline-warning float-left addToCartBtn" data-placement="top" role="button" data-toggle="popover" data-trigger="focus" data-content="Added to cart!">Add to cart</a>
+            @Html.ActionLink("Details", "Details", "Movies", new { id = Model.Id }, new { @class = "btn btn-outline-warning float-right" })
+        </div>
+
+    }
 </div>
+
+<style>
+    .popover {
+        background: #ffc107;
+        border: solid 5px #ffc107;
+    }
+</style>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+<script>
+    $(function () {
+        $("#addToCartSubmit@(Model.Id)").popover();
+        $('#addToCartSubmit@(Model.Id)').click(function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("AddToCart", "Cart")',
+                data: {
+                    __RequestVerificationToken: document.getElementsByName("__RequestVerificationToken")[0].value,
+                    movieId: @Model.Id
+                },
+                success: function(res) {
+                    console.log(res);
+                    $("#cartAmount").text(res);
+                }
+            });
+            $('#addToCartSubmit@(Model.Id)').popover({
+                trigger: 'focus'
+            })
+            return false;
+        });
+    })
+</script>

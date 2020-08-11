@@ -1,0 +1,23 @@
+﻿@model List<MovieStore.Lib.Models.Movie>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1 class="mb-4">Cart</h1>
+
+@if (Model != null)
+{
+    <div class="flex-column">
+        @foreach (MovieStore.Lib.Models.Movie movie in Model)
+        {
+            @Html.Partial("_MovieCartPartial", movie)
+        }
+    </div>
+
+    @Html.ActionLink("Remove all from cart", "RemoveAll", null, new { @class = "btn btn-outline-warning d-block" })
+}
+else
+{
+    <h4>No movies added to cart.</h4>
+}
