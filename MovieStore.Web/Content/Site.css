@@ -21,3 +21,11 @@ textarea {
 body {
     color: #fff;
 }
+
+.bg-dark {
+    background-color: #1a1a1c !important;
+}
+
+.bg-secondary {
+    background-color: #323235 !important;
+}
