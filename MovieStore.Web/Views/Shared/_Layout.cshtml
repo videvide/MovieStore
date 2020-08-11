@@ -5,20 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Movie Store</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/Site.css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
-        @Html.ActionLink("Movie Store", "Index", "Home", new { }, new { @class = "navbar-brand" })
+<body class="bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-light bg-secondary mb-5">
+        @Html.ActionLink("Movie Store", "Index", "Home", new { }, new { @class = "navbar-brand text-warning" })
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", new { }, new { @class = "nav-link" })</li>
-                <li class="nav-item">@Html.ActionLink("About", "About", "Home", new { }, new { @class = "nav-link" })</li>
-                <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Home", new { }, new { @class = "nav-link" })</li>
+                <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", new { }, new { @class = "nav-link text-light" })</li>
+                <li class="nav-item">@Html.ActionLink("About", "About", "Home", new { }, new { @class = "nav-link text-light" })</li>
+                <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Home", new { }, new { @class = "nav-link text-light" })</li>
             </ul>
             @Html.Partial("_ShopingCartPartial")
             @Html.Partial("_LoginPartial")
@@ -26,9 +27,10 @@
     </nav>
     <div class="container body-content">
         @RenderBody()
-        <hr />
+
         <footer>
-            <p>&copy; @DateTime.Now.Year - Movie Store</p>
+            <hr />
+            <p class="text-warning">&copy; @DateTime.Now.Year - Movie Store</p>
         </footer>
     </div>
 

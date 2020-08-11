@@ -18,9 +18,9 @@
                         }
                         @if (User.IsInRole("Customer"))
                         {
-                            @Html.ActionLink("Customer Page", "Index", "Customer", new { }, new { @class = "dropdown-item  text-light" })
+                            @Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", new { }, new { @class = "dropdown-item  text-light" })
                         }
-                        @Html.ActionLink("Welcome, " + User.Identity.GetUserName(), "Index", "Manage", new { }, new { @class = "dropdown-item  text-light" })
+
                         <a class="text-warning dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
                     </div>
                 </div>
@@ -30,9 +30,9 @@
 }
 else
 {
-    <ul class="navbar-nav navbar-right navbar-dark bg-dark">
-        <li class="nav-item">@Html.ActionLink("Register", "Register", "Account", new { }, new { @class = "nav-link" })</li>
-        <li class="nav-item">@Html.ActionLink("Log in", "Login", "Account", new { }, new { @class = "nav-link" })</li>
+    <ul class="navbar-nav navbar-right navbar-light bg-secondary">
+        <li class="nav-item">@Html.ActionLink("Register", "Register", "Account", new { }, new { @class = "nav-link text-light" })</li>
+        <li class="nav-item">@Html.ActionLink("Log in", "Login", "Account", new { }, new { @class = "nav-link text-warning" })</li>
     </ul>
 }
 

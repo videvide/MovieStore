@@ -1,41 +1,41 @@
 ﻿@model MovieStore.Lib.Models.Movie
 
-<div class="card bg-dark text-light col-lg-3 col-md-4 col-sm-6 my-4 py-4">
-    <img class="card-img-top" style="max-height: 22rem;" src="@Model.Poster" alt="Card image cap">
-    <div class="card-body">
-        <h5 class="card-title">@Model.Title</h5>
-        <h6 class="card-subtitle mb-2 text-muted">IMDb Rating <span class="badge badge-warning">@Model.ImdbRating</span></h6>
-        <p class="card-text">
-            @if (Model.Plot.Length > 150)
-            {
-                <span>
-                    @Model.Plot.Substring(0, 150)...
-                </span>
-                <span class="badge badge-pill badge-secondary">
-                    @Html.ActionLink("Read More", "Details", "Movies", new { id = Model.Id }, new { @class = "text-decoration-none text-light   " })
-                </span>
-            }
-            else
-            {
-                @Model.Plot
-            }
-        </p>
-        <h6 class="card-subtitle mb-2 text-muted">Genres: <span class="badge badge-warning">@Model.Genre</span></h6>
-        <h6 class="card-subtitle mb-2 text-muted">Rated: <span class="badge badge-warning">@Model.Rated</span></h6>
-    </div>
-    @using (Html.BeginForm("AddToCart", "Cart", FormMethod.Post, new { id = "addToCartForm" + Model.Id, @class = "navbar-nav navbar-right" }))
-    {
-        @Html.AntiForgeryToken()
-        <input name="movieId" type="hidden" value="@Model.Id" />
-
-        <div class="card-footer bg-dark">
-            @*<input type="submit" class="btn btn-outline-warning float-left" id="addToCartSubmit@(Model.Id)" value="Add to cart" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-content="Added to cart!" />*@
-            <a tabindex="0" id="addToCartSubmit@(Model.Id)" class="btn btn-outline-warning float-left addToCartBtn" data-placement="top" role="button" data-toggle="popover" data-trigger="focus" data-content="Added to cart!">Add to cart</a>
-            @Html.ActionLink("Details", "Details", "Movies", new { id = Model.Id }, new { @class = "btn btn-outline-warning float-right" })
+    <div class="card bg-secondary text-light col-lg-3 col-md-4 col-sm-6 my-4 py-4 m-3">
+        <img class="card-img-top" style="max-height: 22rem;" src="@Model.Poster" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">@Model.Title</h5>
+            <h6 class="card-subtitle mb-2 text-dark">IMDb Rating <span class="badge badge-warning">@Model.ImdbRating</span></h6>
+            <p class="card-text">
+                @if (Model.Plot.Length > 150)
+                {
+                    <span>
+                        @Model.Plot.Substring(0, 150)...
+                    </span>
+                    <span class="badge badge-pill badge-secondary">
+                        @Html.ActionLink("Read More", "Details", "Movies", new { id = Model.Id }, new { @class = "text-decoration-none text-light" })
+                    </span>
+                }
+                else
+                {
+                    @Model.Plot
+                }
+            </p>
+            <h6 class="card-subtitle mb-2 text-dark">Genres: <span class="badge badge-warning">@Model.Genre</span></h6>
+            <h6 class="card-subtitle mb-2 text-dark">Rated: <span class="badge badge-warning">@Model.Rated</span></h6>
         </div>
+        @using (Html.BeginForm("AddToCart", "Cart", FormMethod.Post, new { id = "addToCartForm" + Model.Id, @class = "navbar-nav navbar-right" }))
+        {
+            @Html.AntiForgeryToken()
+            <input name="movieId" type="hidden" value="@Model.Id" />
 
-    }
-</div>
+            <div class="card-footer bg-secondary">
+                @*<input type="submit" class="btn btn-outline-warning float-left" id="addToCartSubmit@(Model.Id)" value="Add to cart" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-content="Added to cart!" />*@
+                <a tabindex="0" id="addToCartSubmit@(Model.Id)" class="btn btn-outline-warning float-left addToCartBtn" data-placement="top" role="button" data-toggle="popover" data-trigger="focus" data-content="Added to cart!">Add to cart</a>
+                @Html.ActionLink("Details", "Details", "Movies", new { id = Model.Id }, new { @class = "btn btn-outline-warning float-right" })
+            </div>
+
+        }
+    </div>
 
 <style>
     .popover {
