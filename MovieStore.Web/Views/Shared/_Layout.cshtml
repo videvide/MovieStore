@@ -11,8 +11,9 @@
 <body class="bg-dark">
     <nav class="navbar navbar-expand-lg navbar-light bg-secondary mb-5">
         @Html.ActionLink("Movie Store", "Index", "Home", new { }, new { @class = "navbar-brand text-warning" })
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler text-warning border-warning py-2" onclick="javascript:$('#hamburger').toggleClass('rotated')" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            @*<span class="navbar-toggler-icon"></span>*@
+            <i class="fas fa-bars hamburger" id="hamburger"></i>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
