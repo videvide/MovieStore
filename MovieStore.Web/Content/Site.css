@@ -29,3 +29,51 @@ body {
 .bg-secondary {
     background-color: #323235 !important;
 }
+
+.navbar {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    margin: 0;
+}
+
+body > .container {
+    margin-top: 5rem;
+}
+
+.cart-alert {
+    position: fixed;
+    top: 4rem;
+    right: 1rem;
+    text-align: center;
+    z-index: 11;
+    box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.5);
+}
+
+.animate {
+    animation: 0.5s addToCart ease forwards;
+}
+
+@keyframes addToCart {
+    0% {
+        transform: scale(1);
+    }
+
+    25% {
+        transform: scale(1.1);
+    }
+
+    50% {
+        transform: scale(0.9);
+    }
+
+    75% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}

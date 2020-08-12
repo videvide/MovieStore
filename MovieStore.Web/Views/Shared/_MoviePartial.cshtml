@@ -29,7 +29,6 @@
         <input name="movieId" type="hidden" value="@Model.Id" />
 
         <div class="card-footer bg-secondary">
-            @*<input type="submit" class="btn btn-outline-warning float-left" id="addToCartSubmit@(Model.Id)" value="Add to cart" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-content="Added to cart!" />*@
             <a tabindex="0" id="addToCartSubmit@(Model.Id)" class="btn btn-outline-warning float-left addToCartBtn" data-placement="top" role="button" data-toggle="popover" data-trigger="focus" data-content="Added to cart!">Add to cart</a>
             @Html.ActionLink("Details", "Details", "Movies", new { id = Model.Id }, new { @class = "btn btn-outline-warning float-right" })
         </div>
@@ -48,8 +47,8 @@
 @Scripts.Render("~/bundles/bootstrap")
 <script>
     $(function () {
-        $("#addToCartSubmit@(Model.Id)").popover();
-        $('#addToCartSubmit@(Model.Id)').click(function (e) {
+        $(".cart-alert").hide();
+        $('#addToCartSubmit@(Model.Id)').click(async function (e) {
             e.preventDefault();
             $.ajax({
                 type: 'POST',
@@ -63,9 +62,16 @@
                     $("#cartAmount").text(res);
                 }
             });
-            $('#addToCartSubmit@(Model.Id)').popover({
-                trigger: 'focus'
-            })
+
+            $(".fa-shopping-cart").toggleClass("animate");
+            setTimeout(function () {
+                $(".fa-shopping-cart").toggleClass("animate");
+            }, 500);
+
+            $(".cart-alert").show().animate({ opacity: 1 }, 250);
+            await setTimeout(function () {
+                $(".cart-alert").animate({ opacity: 0 }, 250).hide();
+            }, 4000)
             return false;
         });
     })
