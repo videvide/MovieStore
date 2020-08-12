@@ -1,0 +1,20 @@
+﻿@model MovieStore.Lib.Models.MovieSearchResponse
+@{
+    ViewBag.Title = "Search Results " + Model.totalResults;
+}
+
+<h2>Search Results</h2>
+
+@{ 
+    if (Model != null)
+    {
+        foreach(var movie in Model.Search)
+        {
+            <h1>@movie.Title</h1>
+        }
+    }
+    else
+    {
+        <h1>No results.</h1>
+    }
+}

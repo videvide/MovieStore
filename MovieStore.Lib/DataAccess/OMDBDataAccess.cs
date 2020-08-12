@@ -98,6 +98,18 @@ namespace MovieStore.Lib.DataAccess
             return output;
         }
 
+       public async Task<MovieSearchResponse> SearchMovies(string query)
+        {
+            var result = await _client.GetAsync($"{API_URI}s={query}");
+            if (result.IsSuccessStatusCode)
+            {
+                var r = await result.Content.ReadAsStringAsync();
+                MovieSearchResponse movieSearchResponse = JsonConvert.DeserializeObject<MovieSearchResponse>(r);
+                return movieSearchResponse;
+            }
+            else throw new Exception("Error fetching data");
+        }
+
         private string FixPosterURL(string url)
         {
             string output = url.Replace("_SX300.jpg", "_.jpg");

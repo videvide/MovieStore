@@ -399,6 +399,7 @@
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\Shared\_MovieCartPartial.cshtml" />
     <Content Include="Views\Customer\Edit.cshtml" />
+    <Content Include="Views\Movies\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MovieStore.Lib\MovieStore.Lib.csproj">

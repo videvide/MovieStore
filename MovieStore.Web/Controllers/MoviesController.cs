@@ -4,8 +4,10 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using MovieStore.Lib.DataAccess;
 using MovieStore.Lib.Models;
 using MovieStore.Web.Models;
 
@@ -13,7 +15,8 @@ namespace MovieStore.Web.Controllers
 {
     public class MoviesController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ApplicationDbContext db = new ApplicationDbContext();
+        private readonly OMDBDataAccess _movieAccess = new OMDBDataAccess();
 
         // GET: Movies
         [Authorize(Roles = "Admin")]
@@ -121,6 +124,14 @@ namespace MovieStore.Web.Controllers
             db.Movies.Remove(movie);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Search (string query)
+        {
+            var movieSearch = await _movieAccess.SearchMovies(query);
+            return View(movieSearch);
         }
 
         protected override void Dispose(bool disposing)
