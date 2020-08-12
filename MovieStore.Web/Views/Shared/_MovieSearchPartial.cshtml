@@ -1,0 +1,19 @@
+﻿@model MovieStore.Lib.Models.MovieSearchObjectResponse
+
+<div class="d-flex my-4 bg-secondary">
+    @if (Model.Poster == "N/A")
+    {
+        <div class="d-flex flex-column justify-content-center align-content-center p-4" style="width: 300px; height: 100%">
+            <img style="max-width: 5rem; height: 100%;" class="mx-auto" src="~/Content/images/image-icon.svg" alt="Poster Image" />
+            <h4 class="mb-4 mx-4 text-center">Image not found</h4>
+        </div>
+    }
+    else
+    {
+        <img src="@Model.Poster" alt="Movie Poster" />
+    }
+    <div class="ml-4 mt-3">
+        <h4>@Model.Title <span class="badge badge-pill badge-warning">@Model.Year</span></h4>
+        <h6>ImdbID: @Model.imdbID</h6>
+    </div>
+</div>
