@@ -3,12 +3,12 @@
     ViewBag.Title = "Search Results " + Model.totalResults;
 }
 
-<h2>Search Results</h2>
-
-@{ 
-    if (Model != null)
+@{
+    if (Model.Search != null)
     {
-        foreach(var movie in Model.Search)
+        <h2>Search Results</h2>
+
+        foreach (var movie in Model.Search)
         {
             <h1>@movie.Title</h1>
         }
