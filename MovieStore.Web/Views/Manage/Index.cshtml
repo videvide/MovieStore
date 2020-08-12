@@ -1,4 +1,6 @@
 ﻿@model MovieStore.Web.Models.IndexViewModel
+@using MovieStore.Web.DataAccess
+@using Microsoft.AspNet.Identity
 @*@{
         ViewBag.Title = "Manage";
     }
@@ -7,7 +9,8 @@
 
 <p class="text-success">@ViewBag.StatusMessage</p>
 <div>
-    <h4>@User.Identity.Name</h4>
+
+    <h3>@(new CustomerDataAccess().GetFullName(User.Identity.GetUserId()))</h3>
     <hr />
     <dl class="dl-horizontal">
 
