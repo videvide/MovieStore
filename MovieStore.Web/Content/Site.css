@@ -85,3 +85,30 @@ body > .container {
         transform: scale(1);
     }
 }
+
+a {
+    color: white;
+}
+
+    a:hover {
+        text-decoration: none;
+        color: #ffc107;
+    }
+
+.table{
+    color:white;
+}
+
+th {
+    color: #ffc107;
+}
+
+.dropdown-menu-right > a:hover {
+    background-color: transparent;
+    font-weight: 500;
+    color:white;
+}
+
+.navbar > a:hover {
+    background-color: transparent;
+}
