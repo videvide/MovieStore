@@ -21,6 +21,13 @@
                 <li class="nav-item">@Html.ActionLink("About", "About", "Home", new { }, new { @class = "nav-link text-light" })</li>
                 <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Home", new { }, new { @class = "nav-link text-light" })</li>
             </ul>
+            @using (Html.BeginForm("Search", "Movies", FormMethod.Post, new { @class = "form-inline my-2 my-lg-0 mr-2 flex w-100 mx-2" }))
+            {
+                @Html.AntiForgeryToken()
+                <input name="query" style="max-width: none;" class="form-control mr-sm-2 d-block flex-grow-1 flex-fill" type="search" placeholder="Search Movies" aria-label="Search">
+                <button class="btn btn-warning my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+            }
+
             @Html.Partial("_ShopingCartPartial")
             @Html.Partial("_LoginPartial")
         </div>
