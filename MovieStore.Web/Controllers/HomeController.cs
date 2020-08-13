@@ -1,4 +1,5 @@
 ﻿using MovieStore.Lib.DataAccess;
+using MovieStore.Lib.Models;
 using MovieStore.Web.Models;
 using System;
 using System.Collections.Generic;
@@ -24,9 +25,24 @@ namespace MovieStore.Web.Controllers
         {
             var movies = _context.Movies.ToList();
 
-            ViewBag.Movies = movies.Take(10).ToList();
+            var m = new List<Movie>();
+            var existingMovies = new List<string>();
+            var rnd = new Random();
+            var i = 0;
+            while (i < 12)
+            {
+                var mov = movies[rnd.Next(0, movies.Count)];
+                if (!existingMovies.Contains(mov.ImdbID))
+                {
+                    m.Add(mov);
+                    existingMovies.Add(mov.ImdbID);
+                    i++;
+                }
+            }
 
-            return View(movies.Take(10).ToList());
+            ViewBag.Movies = m;
+
+            return View(m);
         }
 
         public ActionResult About()
