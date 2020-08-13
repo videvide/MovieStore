@@ -95,8 +95,8 @@ a {
         color: #ffc107;
     }
 
-.table{
-    color:white;
+.table {
+    color: white;
 }
 
 th {
@@ -106,9 +106,69 @@ th {
 .dropdown-menu-right > a:hover {
     background-color: transparent;
     font-weight: 500;
-    color:white;
+    color: white;
 }
 
 .navbar > a:hover {
     background-color: transparent;
+}
+
+#logo {
+    position: relative;
+    left: 0;
+    top: 0;
+    animation: logoAnimation 1s ease forwards;
+}
+
+#brand-name {
+    visibility: hidden;
+    opacity: 0;
+    animation: animateBrand 1s ease forwards 0.75s;
+    position: relative;
+    left: -5%;
+}
+
+@media only screen and (max-width: 991px) {
+    #brand-name {
+        display: none;
+    }
+
+    #logo {
+        opacity: 0;
+        animation: logoAnimation2 0.5s ease forwards;
+    }
+
+    @keyframes logoAnimation2 {
+        0% {
+            left: -25%;
+            opacity: 0;
+        }
+
+        100% {
+            left: 0;
+            opacity: 1;
+        }
+    }
+}
+
+@keyframes animateBrand {
+    0% {
+        visibility: visible;
+        opacity: 0;
+    }
+
+    100% {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+@keyframes logoAnimation {
+    0% {
+        left: -60%;
+    }
+
+    100% {
+        left: 5%;
+    }
 }
