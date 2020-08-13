@@ -1,14 +1,17 @@
-﻿@model MovieStore.Lib.Models.Movie
+﻿@model MovieStore.Web.Models.MovieCartPartialViewModel
 
-<div class="col d-flex mb-4">
-    <img class="img-fluid" style="max-width: 10vw;" src="@Model.Poster" alt="Card image cap">
+<div class="col d-flex mb-4 bg-secondary pl-0">
+    <img class="img-fluid" style="max-width: 10vw;" src="@Model.Movie.Poster" alt="Card image cap">
     <div class="ml-4">
-        <h2>@Model.Title</h2>
-        <h4>@Model.Price kr</h4>
+        <h2>@Model.Movie.Title</h2>
+        <h4>@Model.Movie.Price kr</h4>
+        <h6>@Model.Count</h6>
+        <h6>@Model.TotalPrice kr</h6>
     </div>
     <div class="ml-auto align-self-center">
-        <a href="@Url.Action("Remove", new { movieId = Model.Id })" class="mx-2 text-danger"><i class="fas fa-minus fa-2x"></i></a>
-        <a href="@Url.Action("Add", new { movieId = Model.Id })" class="mx-2 text-primary"><i class="fas fa-plus fa-2x"></i></a>
-
+        <a href="@Url.Action("Remove", new { movieId = Model.Movie.Id })" class="mx-2 text-danger"><i class="fas fa-minus fa-2x"></i></a>
+        <a href="@Url.Action("Add", new { movieId = Model.Movie.Id })" class="mx-2 text-primary"><i class="fas fa-plus fa-2x"></i></a>
     </div>
 </div>
+
+@*<div style="padding-bottom: 1px; background-color: #ffc107; margin-bottom: 1.5rem"></div>*@

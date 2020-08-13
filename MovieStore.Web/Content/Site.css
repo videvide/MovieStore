@@ -112,13 +112,15 @@ th {
     background-color: transparent;
 }
 
-.card {
-    box-shadow: -0.5px 0 black, 0 0.5px black, 0 0 17px #e08115, 0 0 5px #e08115;
+/*.card {
+    box-shadow: 0px 0px 15px 1px rgba(224, 129, 21, 0.4);
+    border: 1px solid #ffc107;
 }
 
 .jumbotron {
-    box-shadow: -0.5px 0 black, 0 0.5px black, 0 0 17px #e08115, 0 0 5px #e08115;
-}
+    box-shadow: 0px 0px 15px 1px rgba(224, 129, 21, 0.4);
+    border: 1px solid #ffc107;
+}*/
 
 #logo {
     position: relative;
@@ -141,20 +143,19 @@ th {
     }
 
     #logo {
-        opacity: 0;
-        animation: logoAnimation2 0.5s ease forwards;
+        display: none;
     }
 
-    @keyframes logoAnimation2 {
-        0% {
-            left: -25%;
-            opacity: 0;
-        }
+    .body-content > .jumbotron {
+        display: none !important;
+    }
 
-        100% {
-            left: 0;
-            opacity: 1;
-        }
+    .body-content {
+        margin-top: 3rem !important;
+    }
+
+    .card {
+        min-width: 45% !important;
     }
 }
 
@@ -178,4 +179,13 @@ th {
     100% {
         left: 5%;
     }
+}
+
+/*.card-img-top {
+    max-width: 75%;
+    margin: auto;
+}*/
+
+.card {
+    max-width: 75%;
 }

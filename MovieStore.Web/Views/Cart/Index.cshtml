@@ -8,10 +8,50 @@
 
 @if (Model != null)
 {
+    decimal totalPrice = 0;
+    foreach (var movie in Model)
+    {
+        totalPrice += movie.Price;
+    }
+
+    <h3>Total: @totalPrice kr</h3>
     <div class="flex-column">
+
+        @{
+            List<string> moviesChecked = new List<string>();
+        }
+
         @foreach (MovieStore.Lib.Models.Movie movie in Model)
         {
-            @Html.Partial("_MovieCartPartial", movie)
+            int movieCount = Model.Count(m => m.ImdbID == movie.ImdbID);
+
+            if (!moviesChecked.Contains(movie.ImdbID))
+            {
+                moviesChecked.Add(movie.ImdbID);
+                if (movieCount > 1)
+                {
+                    var m = new MovieStore.Web.Models.MovieCartPartialViewModel
+                    {
+                        Count = movieCount,
+                        Movie = movie,
+                        TotalPrice = movie.Price * movieCount
+                    };
+
+                    @Html.Partial("_MovieCartPartial", m);
+                }
+                else
+                {
+                    var m = new MovieStore.Web.Models.MovieCartPartialViewModel
+                    {
+                        Count = movieCount,
+                        Movie = movie,
+                        TotalPrice = movie.Price * movieCount
+                    };
+
+                    @Html.Partial("_MovieCartPartial", m);
+                }
+
+            }
         }
     </div>
 
