@@ -105,12 +105,19 @@ th {
 
 .dropdown-menu-right > a:hover {
     background-color: transparent;
-    font-weight: 500;
     color: white;
 }
 
 .navbar > a:hover {
     background-color: transparent;
+}
+
+.card {
+    box-shadow: -0.5px 0 black, 0 0.5px black, 0 0 17px #e08115, 0 0 5px #e08115;
+}
+
+.jumbotron {
+    box-shadow: -0.5px 0 black, 0 0.5px black, 0 0 17px #e08115, 0 0 5px #e08115;
 }
 
 #logo {
