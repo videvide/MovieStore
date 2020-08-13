@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h1 class="mb-4">Cart</h1>
+<h1 class="mb-4 text-warning">Cart</h1>
 
 @if (Model != null)
 {
@@ -14,7 +14,7 @@
         totalPrice += movie.Price;
     }
 
-    <h3>Total: @totalPrice kr</h3>
+    @*<h3>Total: @totalPrice kr</h3>*@
     <div class="flex-column">
 
         @{
@@ -54,7 +54,7 @@
             }
         }
     </div>
-
+    <h3>Order total: @totalPrice kr</h3>
     @Html.ActionLink("Remove all from cart", "RemoveAll", null, new { @class = "btn btn-outline-warning d-block" })
 }
 else
