@@ -59,27 +59,25 @@
 </div>
 
 @*<div class="mt-4 text-center">*@
-<i class="fas fa-door-open text-warning">
-    @Html.ActionLink("Back to Admin Page", "Index")
-</i>
-    @*</div>*@
+<a href="@Url.Action("Index")">Back to Admin Page <i class="fas fa-door-open text-warning"></i></a>
+@*</div>*@
 
-    <script>
-        document.getElementById("roleSelector").addEventListener("change", (e) => {
-            let selectedItem = e.currentTarget.options[e.currentTarget.selectedIndex].text
-            let roleDisplayElement = document.querySelectorAll(".roleDisplay");
+<script>
+    document.getElementById("roleSelector").addEventListener("change", (e) => {
+        let selectedItem = e.currentTarget.options[e.currentTarget.selectedIndex].text
+        let roleDisplayElement = document.querySelectorAll(".roleDisplay");
 
-            roleDisplayElement.forEach(e => {
-                if (!e.classList.contains("hidden")) {
-                    e.classList.add("hidden");
-                }
-            });
-
-            if (selectedItem != "") {
-                let element = document.getElementById(selectedItem);
-                if (element != null) {
-                    element.classList.toggle("hidden");
-                }
+        roleDisplayElement.forEach(e => {
+            if (!e.classList.contains("hidden")) {
+                e.classList.add("hidden");
             }
         });
-    </script>
+
+        if (selectedItem != "") {
+            let element = document.getElementById(selectedItem);
+            if (element != null) {
+                element.classList.toggle("hidden");
+            }
+        }
+    });
+</script>
