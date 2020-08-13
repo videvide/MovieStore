@@ -402,6 +402,7 @@
     <Content Include="Views\Customer\Edit.cshtml" />
     <Content Include="Views\Movies\Search.cshtml" />
     <Content Include="Views\Shared\_MovieSearchPartial.cshtml" />
+    <Content Include="Views\Movies\DetailsImdb.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MovieStore.Lib\MovieStore.Lib.csproj">

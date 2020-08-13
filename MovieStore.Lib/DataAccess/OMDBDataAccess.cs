@@ -33,6 +33,7 @@ namespace MovieStore.Lib.DataAccess
                 throw new Exception("Error");
             }
         }
+
         public async Task<MovieResponse> GetMovieById(string id)
         {
             var result = await _client.GetAsync($"{API_URI}i={id}&plot=full");
@@ -66,7 +67,6 @@ namespace MovieStore.Lib.DataAccess
 
                 return data;
             }
-
             else throw new Exception("Error fetching data");
         }
 
@@ -74,7 +74,7 @@ namespace MovieStore.Lib.DataAccess
         {
             var movieIdList = await GetTop100MovieIds();
 
-            List<Movie> output = new List<Movie>(); 
+            List<Movie> output = new List<Movie>();
             foreach (var movieId in movieIdList)
             {
                 var m = await GetMovieById(movieId.id.Replace("/title/", "").Replace("/", "").Trim());
@@ -98,7 +98,7 @@ namespace MovieStore.Lib.DataAccess
             return output;
         }
 
-       public async Task<MovieSearchResponse> SearchMovies(string query)
+        public async Task<MovieSearchResponse> SearchMovies(string query)
         {
             var result = await _client.GetAsync($"{API_URI}s={query}");
             if (result.IsSuccessStatusCode)
@@ -110,7 +110,7 @@ namespace MovieStore.Lib.DataAccess
             else throw new Exception("Error fetching data");
         }
 
-        private string FixPosterURL(string url)
+        public string FixPosterURL(string url)
         {
             string output = url.Replace("_SX300.jpg", "_.jpg");
 
@@ -118,4 +118,3 @@ namespace MovieStore.Lib.DataAccess
         }
     }
 }
-

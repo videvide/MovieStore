@@ -40,6 +40,56 @@ namespace MovieStore.Web.Controllers
             return View(movie);
         }
 
+        public async Task<ActionResult> DetailsImdb(string id)
+        {
+            var mov = db.Movies.FirstOrDefault(m => m.ImdbID == id);
+
+            if (mov != null)
+            {
+                return RedirectToAction("Details", new { id = mov.Id });
+            }
+            else
+            {
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                MovieResponse movieRes = await _movieAccess.GetMovieById(id);
+                if (movieRes == null)
+                {
+                    return HttpNotFound();
+                }
+
+                Movie movie = new Movie
+                {
+                    Director = movieRes.Director,
+                    Genre = movieRes.Genre,
+                    ImdbID = movieRes.imdbID,
+                    ImdbRating = movieRes.imdbRating,
+                    Plot = movieRes.Plot,
+                    Poster = _movieAccess.FixPosterURL(movieRes.Poster),
+                    Price = 199,
+                    Rated = movieRes.Rated,
+                    ReleaseYear = movieRes.Year,
+                    Title = movieRes.Title
+                };
+
+                db.Movies.Add(movie);
+                await db.SaveChangesAsync();
+
+                var mo = db.Movies.FirstOrDefault(m => m.ImdbID == id);
+
+                if (mo != null)
+                {
+                    return RedirectToAction("Details", new { id = mo.Id });
+                }
+                else
+                {
+                    return View(movie);
+                }
+            }
+        }
+
         // GET: Movies/Create
         [Authorize(Roles = "Admin")]
         public ActionResult Create()
@@ -48,7 +98,7 @@ namespace MovieStore.Web.Controllers
         }
 
         // POST: Movies/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -82,7 +132,7 @@ namespace MovieStore.Web.Controllers
         }
 
         // POST: Movies/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -125,10 +175,10 @@ namespace MovieStore.Web.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Search (string query)
+        public async Task<ActionResult> Search(string query)
         {
             var movieSearch = await _movieAccess.SearchMovies(query);
             return View(movieSearch);
