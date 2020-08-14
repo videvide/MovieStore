@@ -17,3 +17,175 @@ select,
 textarea {
     max-width: 280px;
 }
+
+body {
+    color: #fff;
+}
+
+.bg-dark {
+    background-color: #1a1a1c !important;
+}
+
+.bg-secondary {
+    background-color: #323235 !important;
+}
+
+.navbar {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    margin: 0;
+}
+
+body > .container {
+    margin-top: 5rem;
+}
+
+.cart-alert {
+    position: fixed;
+    top: 4rem;
+    right: 1rem;
+    text-align: center;
+    z-index: 11;
+    box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.5);
+}
+
+.animate {
+    animation: 0.5s addToCart ease forwards;
+}
+
+.hamburger {
+    transition: ease 0.5s all;
+}
+
+    .hamburger.rotated {
+        transform: rotate(270deg);
+    }
+
+@keyframes addToCart {
+    0% {
+        transform: scale(1);
+    }
+
+    25% {
+        transform: scale(1.1);
+    }
+
+    50% {
+        transform: scale(0.9);
+    }
+
+    75% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+a {
+    color: white;
+}
+
+    a:hover {
+        text-decoration: none;
+        color: #ffc107;
+    }
+
+.table {
+    color: white;
+}
+
+th {
+    color: #ffc107;
+}
+
+.dropdown-menu-right > a:hover {
+    background-color: transparent;
+    color: white;
+}
+
+.navbar > a:hover {
+    background-color: transparent;
+}
+
+/*.card {
+    box-shadow: 0px 0px 15px 1px rgba(224, 129, 21, 0.4);
+    border: 1px solid #ffc107;
+}
+
+.jumbotron {
+    box-shadow: 0px 0px 15px 1px rgba(224, 129, 21, 0.4);
+    border: 1px solid #ffc107;
+}*/
+
+#logo {
+    position: relative;
+    left: 0;
+    top: 0;
+    animation: logoAnimation 1s ease forwards;
+}
+
+#brand-name {
+    visibility: hidden;
+    opacity: 0;
+    animation: animateBrand 1s ease forwards 0.75s;
+    position: relative;
+    left: -5%;
+}
+
+@media only screen and (max-width: 991px) {
+    #brand-name {
+        display: none;
+    }
+
+    #logo {
+        display: none;
+    }
+
+    .body-content > .jumbotron {
+        display: none !important;
+    }
+
+    .body-content {
+        margin-top: 3rem !important;
+    }
+
+    .card {
+        min-width: 45% !important;
+    }
+}
+
+@keyframes animateBrand {
+    0% {
+        visibility: visible;
+        opacity: 0;
+    }
+
+    100% {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+@keyframes logoAnimation {
+    0% {
+        left: -60%;
+    }
+
+    100% {
+        left: 5%;
+    }
+}
+
+/*.card-img-top {
+    max-width: 75%;
+    margin: auto;
+}*/
+
+.card {
+    max-width: 75%;
+}

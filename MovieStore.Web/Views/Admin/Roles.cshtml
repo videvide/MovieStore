@@ -58,9 +58,9 @@
     }
 </div>
 
-<div class="mt-4 text-center">
-    @Html.ActionLink("Back to Admin Page", "Index")
-</div>
+@*<div class="mt-4 text-center">*@
+<a href="@Url.Action("Index")">Back to Admin Page <i class="fas fa-door-open text-warning"></i></a>
+@*</div>*@
 
 <script>
     document.getElementById("roleSelector").addEventListener("change", (e) => {

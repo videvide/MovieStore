@@ -1,0 +1,20 @@
+﻿@model MovieStore.Lib.Models.MovieSearchObjectResponse
+
+<div class="d-flex my-4 bg-secondary p-0 w-75 mx-auto">
+    @if (Model.Poster == "N/A")
+    {
+        <div class="d-flex flex-column justify-content-center align-content-center p-4 my-auto" style="width: 500px; height: 100%">
+            <img style="max-width: 5rem; height: 100%;" class="mx-auto img-fluid" src="~/Content/images/image-icon.svg" alt="Poster Image" />
+            <h4 class="mb-4 mx-4 text-center">Image not found</h4>
+        </div>
+    }
+    else
+    {
+        <img src="@Model.Poster" class="img-fluid ml-0" style="max-height: 100%; width: auto;" alt="Movie Poster" />
+    }
+    <div class="ml-4 mt-3 w-100" style="position: relative; min-height: 400px">
+        <h5 style="width: 90%;" class="mx-auto d-block mr-4"><span class="badge badge-pill badge-secondary w-100">@string.Format("{0}{1}", Model.Type[0].ToString().ToUpper(), Model.Type.Substring(1))</span></h5>
+        <h2 class="text-center mt-5">@Model.Title <span class="badge badge-pill badge-warning mt-2">@Model.Year</span></h2>
+        @Html.ActionLink("Details", "DetailsImdb", "Movies", new { id = Model.imdbID }, new { @class = "btn btn-warning d-block m-auto", style = "width: 95%; position: absolute; bottom: 2rem;" })
+    </div>
+</div>

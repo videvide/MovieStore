@@ -1,0 +1,23 @@
+﻿@model MovieStore.Lib.Models.MovieSearchResponse
+@{
+    ViewBag.Title = "Search Results";
+}
+
+@{
+    if (Model.Search != null)
+    {
+        <h2 class="mb-3 text-center">@Model.Search.Count Results</h2>
+
+        <div>
+            @foreach (var movie in Model.Search)
+            {
+                @Html.Partial("_MovieSearchPartial", movie)
+            }
+        </div>
+
+    }
+    else
+    {
+        <h1>No results.</h1>
+    }
+}

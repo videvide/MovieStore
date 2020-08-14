@@ -1,0 +1,167 @@
+﻿@model MovieStore.Web.Models.CheckOutViewModel
+
+@using Microsoft.AspNet.Identity;
+@using MovieStore.Web.DataAccess;
+@using MovieStore.Web.Models;
+
+@{
+    ViewBag.Title = "Index";
+    var c = new CustomerDataAccess().GetCustomer(User.Identity.GetUserId());
+}
+
+<h1 class="mb-4 text-warning">Check out</h1>
+
+@if (Model != null)
+{
+    decimal totalPrice = 0;
+    foreach (var movie in Model.Movies)
+    {
+        totalPrice += movie.Price;
+    }
+
+    @*<h3>Total: @totalPrice kr</h3>*@
+    <div class="flex-column">
+
+        @{
+            List<string> moviesChecked = new List<string>();
+        }
+
+        @foreach (MovieStore.Lib.Models.Movie movie in Model.Movies)
+        {
+            int movieCount = Model.Movies.Count(m => m.ImdbID == movie.ImdbID);
+
+            if (!moviesChecked.Contains(movie.ImdbID))
+            {
+                moviesChecked.Add(movie.ImdbID);
+                if (movieCount > 1)
+                {
+                    var m = new MovieStore.Web.Models.MovieCartPartialViewModel
+                    {
+                        Count = movieCount,
+                        Movie = movie,
+                        TotalPrice = movie.Price * movieCount
+                    };
+
+                    @Html.Partial("_MovieCartPartial", m);
+                }
+                else
+                {
+                    var m = new MovieStore.Web.Models.MovieCartPartialViewModel
+                    {
+                        Count = movieCount,
+                        Movie = movie,
+                        TotalPrice = movie.Price * movieCount
+                    };
+
+                    @Html.Partial("_MovieCartPartial", m);
+                }
+
+            }
+        }
+    </div>
+    <h3>Order total: @totalPrice kr</h3>
+
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Personal details</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Customer.Id)
+            @Html.HiddenFor(model => model.Customer.ApplicationUserId)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Customer.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Customer.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Customer.FirstName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Customer.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Customer.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Customer.LastName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Customer.BillingAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Customer.BillingAddress, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Customer.BillingAddress, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Customer.BillingCity, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Customer.BillingCity, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Customer.BillingCity, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Customer.BillingZip, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Customer.BillingZip, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Customer.BillingZip, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Customer.DeliveryAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Customer.DeliveryAddress, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Customer.DeliveryAddress, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Customer.DeliveryCity, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Customer.DeliveryCity, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Customer.DeliveryCity, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Customer.DeliveryZip, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Customer.DeliveryZip, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Customer.DeliveryZip, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Customer.EmailAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Customer.EmailAddress, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Customer.EmailAddress, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Customer.PhoneNo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Customer.PhoneNo, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Customer.PhoneNo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Proceed to payment" class="btn btn-warning" />
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <h4>No movies added to cart.</h4>
+}
+

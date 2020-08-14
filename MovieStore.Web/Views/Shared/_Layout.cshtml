@@ -5,34 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Movie Store</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/Site.css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/popper")
+    @Scripts.Render("~/bundles/bootstrap")
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
-        @Html.ActionLink("Movie Store", "Index", "Home", new { }, new { @class = "navbar-brand" })
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+<body class="bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+        @*@Html.ActionLink("Movie Store", "Index", "Home", new { }, new { @class = "navbar-brand text-warning" })*@
+        <a href="@Url.Action("Index", "Home")" class="navbar-brand text-warning">
+            <img src="~/Content/Images/logo.svg" width="50" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+        </a>
+        <button class="navbar-toggler text-warning border-warning py-2" onclick="javascript:$('#hamburger').toggleClass('rotated')" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            @*<span class="navbar-toggler-icon"></span>*@
+            <i class="fas fa-bars hamburger" id="hamburger"></i>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", new { }, new { @class = "nav-link" })</li>
-                <li class="nav-item">@Html.ActionLink("About", "About", "Home", new { }, new { @class = "nav-link" })</li>
-                <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Home", new { }, new { @class = "nav-link" })</li>
+                <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", new { }, new { @class = "nav-link text-light" })</li>
+                <li class="nav-item">@Html.ActionLink("About", "About", "Home", new { }, new { @class = "nav-link text-light" })</li>
+                <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Home", new { }, new { @class = "nav-link text-light" })</li>
             </ul>
+            @using (Html.BeginForm("Search", "Movies", FormMethod.Post, new { @class = "form-inline my-2 my-lg-0 mr-2 flex w-100 mx-2" }))
+            {
+                @Html.AntiForgeryToken()
+                <input name="query" style="max-width: none;" class="form-control mr-sm-2 d-block flex-grow-1 flex-fill" type="search" placeholder="Search Movies" aria-label="Search">
+                <button class="btn btn-warning my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+            }
+
+            @Html.Partial("_ShopingCartPartial")
             @Html.Partial("_LoginPartial")
         </div>
     </nav>
     <div class="container body-content">
+        <div class="alert alert-warning bg-warning border-0 text-dark cart-alert" style="display: none; opacity: 0;" role="alert">
+            Added! <br />
+            @Html.ActionLink("Go to checkout.", "Index", "Cart", null, new { @class = " text-dark" })
+        </div>
         @RenderBody()
-        <hr />
+
         <footer>
-            <p>&copy; @DateTime.Now.Year - Movie Store</p>
+            <hr />
+            <p class="text-warning">&copy; @DateTime.Now.Year - Movie Store</p>
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    <script src="https://kit.fontawesome.com/b99a277209.js" crossorigin="anonymous"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

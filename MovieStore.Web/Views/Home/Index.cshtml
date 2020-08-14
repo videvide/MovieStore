@@ -4,16 +4,19 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>Movie Store</h1>
+<div class="jumbotron bg-secondary my-2 d-flex align-items-center justify-content-center">
+    <h1 class="text-warning display-1" id="brand-name">Movie Store</h1>
+    <img id="logo" style="max-width: 10rem" src="~/Content/Images/logo.svg" alt="Logo" />
+    @*<div class="w-100 d-flex justify-content-center">
+        </div>*@
 </div>
 
-<div class="row align-items-stretch align-content-stretch justify-content-center">
-        @if (Model.Count > 0)
+<div class="row align-items-stretch align-content-stretch justify-content-around">
+    @if (Model.Count > 0)
+    {
+        foreach (var movie in Model)
         {
-            foreach (var movie in Model)
-            {
-                @Html.Partial("_MoviePartial", movie)
-            }
+            @Html.Partial("_MoviePartial", movie)
         }
+    }
 </div>

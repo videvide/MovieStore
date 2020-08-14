@@ -163,17 +163,18 @@ namespace MovieStore.Web.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var customer = new Customer
-                {
-                    FirstName = model.FirstName,
-                    LastName = model.LastName,
-                    EmailAddress = model.Email,
-                    PhoneNo = model.PhoneNo
-                };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    var addedCustomer = _context.Customers.Add(customer);
+                    var customer = new Customer
+                    {
+                        FirstName = model.FirstName,
+                        LastName = model.LastName,
+                        EmailAddress = model.Email,
+                        PhoneNo = model.PhoneNo,
+                        ApplicationUserId = user.Id
+                    };
+                    _context.Customers.Add(customer);
                     await UserManager.AddToRoleAsync(user.Id, "Customer");
                     await _context.SaveChangesAsync();
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);

@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNet.Identity
+@using MovieStore.Web.DataAccess
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-nav navbar-right" }))
@@ -6,31 +7,32 @@
         @Html.AntiForgeryToken()
 
         <ul class="navbar-nav navbar-right navbar-dark">
-            @if (User.IsInRole("Admin"))
-            {
             <li class="nav-item">
-                @Html.ActionLink("Admin Page", "Index", "Admin", new { }, new { @class = "nav-link" })
+                <div class="dropdown">
+                    <button class="btn text-warning p-1" style="font-size:1rem;" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-user-circle fa-2x"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right bg-dark" aria-labelledby="dropdownMenu2">
+                        @if (User.IsInRole("Admin"))
+                        {
+                            @Html.ActionLink("Admin Page", "Index", "Admin", new { }, new { @class = "dropdown-item  text-light" })
+                        }
+                        @if (User.IsInRole("Customer"))
+                        {
+                            @Html.ActionLink(new CustomerDataAccess().GetFullName(User.Identity.GetUserId()), "Index", "Manage", new { }, new { @class = "dropdown-item  text-light" })
+                        }
+
+                        <a class="text-warning dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+                    </div>
+                </div>
             </li>
-            }
-            @if (User.IsInRole("Customer"))
-            {
-        <li class="nav-item">
-            @Html.ActionLink("Customer Page", "Index", "Customer", new { }, new { @class = "nav-link" })
-        </li>
-            }
-        <li class="nav-item">
-            @Html.ActionLink("Welcome, " + User.Identity.GetUserName(), "Index", "Manage", new { } , new { @class = "nav-link" })
-        </li>       
-            <li class="nav-item"><a class="nav-link text-success" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
         </ul>
     }
 }
 else
 {
-            <ul class="navbar-nav navbar-right navbar-dark bg-dark">
-                <li class="nav-item">@Html.ActionLink("Register", "Register", "Account", new { }, new { @class = "nav-link" })</li>
-                <li class="nav-item">@Html.ActionLink("Log in", "Login", "Account", new { }, new { @class = "nav-link" })</li>
-            </ul>
+    <ul class="navbar-nav navbar-right navbar-light bg-secondary">
+        <li class="nav-item">@Html.ActionLink("Register", "Register", "Account", new { }, new { @class = "nav-link text-light text-nowrap" })</li>
+        <li class="nav-item">@Html.ActionLink("Log in", "Login", "Account", new { }, new { @class = "nav-link text-warning text-nowrap" })</li>
+    </ul>
 }
-
-

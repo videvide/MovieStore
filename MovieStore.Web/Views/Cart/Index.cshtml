@@ -1,0 +1,64 @@
+﻿@model List<MovieStore.Lib.Models.Movie>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1 class="mb-4 text-warning">Cart</h1>
+
+@if (Model != null)
+{
+    decimal totalPrice = 0;
+    foreach (var movie in Model)
+    {
+        totalPrice += movie.Price;
+    }
+
+    @*<h3>Total: @totalPrice kr</h3>*@
+    <div class="flex-column">
+
+        @{
+            List<string> moviesChecked = new List<string>();
+        }
+
+        @foreach (MovieStore.Lib.Models.Movie movie in Model)
+        {
+            int movieCount = Model.Count(m => m.ImdbID == movie.ImdbID);
+
+            if (!moviesChecked.Contains(movie.ImdbID))
+            {
+                moviesChecked.Add(movie.ImdbID);
+                if (movieCount > 1)
+                {
+                    var m = new MovieStore.Web.Models.MovieCartPartialViewModel
+                    {
+                        Count = movieCount,
+                        Movie = movie,
+                        TotalPrice = movie.Price * movieCount
+                    };
+
+                    @Html.Partial("_MovieCartPartial", m);
+                }
+                else
+                {
+                    var m = new MovieStore.Web.Models.MovieCartPartialViewModel
+                    {
+                        Count = movieCount,
+                        Movie = movie,
+                        TotalPrice = movie.Price * movieCount
+                    };
+
+                    @Html.Partial("_MovieCartPartial", m);
+                }
+
+            }
+        }
+    </div>
+    <h3>Order total: @totalPrice kr</h3>
+    @Html.ActionLink("Continue to checkout", "Index", "CheckOut", null, new { @class = "btn btn-outline-warning d-block mb-4" })
+    @Html.ActionLink("Remove all from cart", "RemoveAll", null, new { @class = "btn btn-outline-warning d-block" })
+}
+else
+{
+    <h4>No movies added to cart.</h4>
+}

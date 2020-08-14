@@ -21,7 +21,7 @@ namespace MovieStore.Lib.DataAccess
 
         public async Task<MovieResponse> GetMovieByTitle(string title)
         {
-            var result = await _client.GetAsync($"{API_URI}t={title}");
+            var result = await _client.GetAsync($"{API_URI}t={title}&plot=full");
             if (result.IsSuccessStatusCode)
             {
                 var r = await result.Content.ReadAsStringAsync();
@@ -33,9 +33,10 @@ namespace MovieStore.Lib.DataAccess
                 throw new Exception("Error");
             }
         }
+
         public async Task<MovieResponse> GetMovieById(string id)
         {
-            var result = await _client.GetAsync($"{API_URI}i={id}");
+            var result = await _client.GetAsync($"{API_URI}i={id}&plot=full");
             if (result.IsSuccessStatusCode)
             {
                 var r = await result.Content.ReadAsStringAsync();
@@ -66,7 +67,6 @@ namespace MovieStore.Lib.DataAccess
 
                 return data;
             }
-
             else throw new Exception("Error fetching data");
         }
 
@@ -74,7 +74,7 @@ namespace MovieStore.Lib.DataAccess
         {
             var movieIdList = await GetTop100MovieIds();
 
-            List<Movie> output = new List<Movie>(); 
+            List<Movie> output = new List<Movie>();
             foreach (var movieId in movieIdList)
             {
                 var m = await GetMovieById(movieId.id.Replace("/title/", "").Replace("/", "").Trim());
@@ -88,7 +88,7 @@ namespace MovieStore.Lib.DataAccess
                     ImdbID = m.imdbID,
                     ImdbRating = m.imdbRating,
                     Plot = m.Plot,
-                    Poster = m.Poster,
+                    Poster = FixPosterURL(m.Poster),
                     Rated = m.Rated
                 };
 
@@ -97,6 +97,24 @@ namespace MovieStore.Lib.DataAccess
 
             return output;
         }
+
+        public async Task<MovieSearchResponse> SearchMovies(string query)
+        {
+            var result = await _client.GetAsync($"{API_URI}s={query}");
+            if (result.IsSuccessStatusCode)
+            {
+                var r = await result.Content.ReadAsStringAsync();
+                MovieSearchResponse movieSearchResponse = JsonConvert.DeserializeObject<MovieSearchResponse>(r);
+                return movieSearchResponse;
+            }
+            else throw new Exception("Error fetching data");
+        }
+
+        public string FixPosterURL(string url)
+        {
+            string output = url.Replace("_SX300.jpg", "_.jpg");
+
+            return output;
+        }
     }
 }
-

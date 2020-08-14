@@ -1,0 +1,59 @@
+﻿@model MovieStore.Lib.Models.Movie
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="d-flex flex-column flex-md-row flex-sm-column bg-secondary shadow-sm" style="border-radius: 0 3rem 0 0">
+    <img class="img-fluid h-auto w-100" style="max-width: 400px" src="@Model.Poster" alt="Movie Poster" />
+    <div class="mx-2 mt-2">
+        <h2 class="text-white">@Html.DisplayFor(model => model.Title)</h2>
+        <div class="d-flex flex-row mb-2">
+            <h6 class="card-subtitle mr-3 text-muted">IMDb Rating <span class="badge badge-warning">@Html.DisplayFor(model => model.ImdbRating)</span></h6>
+            <h6 class="card-subtitle mr-3 text-muted">Rated <span class="badge badge-warning">@Html.DisplayFor(model => model.Rated)</span></h6>
+            <h6 class="card-subtitle mr-3 text-muted">Genre <span class="badge badge-warning">@Html.DisplayFor(model => model.Genre)</span></h6>
+        </div>
+        <h5 class="text-white font-weight-light">
+            @Html.DisplayFor(model => model.Plot)
+        </h5>
+    </div>
+</div>
+@using (Html.BeginForm("AddToCart", "Cart", FormMethod.Post, new { id = "addToCartForm" + Model.Id, @class = "navbar-nav navbar-right" }))
+{
+    @Html.AntiForgeryToken()
+    <input name="movieId" type="hidden" value="@Model.Id" />
+    <a tabindex="0" id="addToCartSubmitDetailsView@(Model.Id)" class="btn btn-outline-warning d-block shadow-sm" style="border-radius: 0 0 3rem 3rem" data-placement="top" role="button" data-toggle="popover" data-trigger="focus" data-content="Added to cart!">Add to cart</a>
+}
+
+<script>
+    $(function () {
+        $(".cart-alert").hide();
+        $('#addToCartSubmitDetailsView@(Model.Id)').click(async function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("AddToCart", "Cart")',
+                data: {
+                    __RequestVerificationToken: document.getElementsByName("__RequestVerificationToken")[0].value,
+                    movieId: @Model.Id
+                },
+                success: function(res) {
+                    console.log(res);
+                    $("#cartAmount").text(res);
+                }
+            });
+
+            $(".fa-shopping-cart").toggleClass("animate");
+            setTimeout(function () {
+                $(".fa-shopping-cart").toggleClass("animate");
+            }, 500);
+
+            $(".cart-alert").show().animate({ opacity: 1 }, 250);
+            await setTimeout(function () {
+                $(".cart-alert").animate({ opacity: 0 }, 250).hide();
+            }, 4000)
+            return false;
+        });
+    })
+</script>
+@*<a href="#" class="btn btn-outline-warning d-block shadow-sm" style="border-radius: 0 0 3rem 3rem">Add to cart</a>*@

@@ -134,6 +134,7 @@ namespace MovieStore.Web.Controllers
                 context.Movies.Add(movie);
                 context.SaveChanges();
             }
+
             var updateDate = new MovieUpdateHistory
             {
                 LastUpdate = DateTime.Now
@@ -154,6 +155,6 @@ namespace MovieStore.Web.Controllers
             context.SaveChanges();
         }
 
-        #endregion
+        #endregion Movie Action
     }
 }
