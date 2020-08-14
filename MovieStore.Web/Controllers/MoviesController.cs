@@ -30,12 +30,12 @@ namespace MovieStore.Web.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index", "NotFound", new { aspxerrorpath = Request.Url.AbsolutePath });
             }
             Movie movie = db.Movies.Find(id);
             if (movie == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("Index", "NotFound", new { aspxerrorpath = Request.Url.AbsolutePath });
             }
             return View(movie);
         }

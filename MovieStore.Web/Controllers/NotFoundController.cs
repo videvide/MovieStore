@@ -9,8 +9,10 @@ namespace MovieStore.Web.Controllers
     public class NotFoundController : Controller
     {
         // GET: NotFound
-        public ActionResult Index()
+        public ActionResult Index(string aspxerrorpath)
         {
+            ViewBag.NotFoundPath = aspxerrorpath;
+
             return View();
         }
     }
