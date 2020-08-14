@@ -24,8 +24,7 @@
     <input name="movieId" type="hidden" value="@Model.Id" />
     <a tabindex="0" id="addToCartSubmitDetailsView@(Model.Id)" class="btn btn-outline-warning d-block shadow-sm" style="border-radius: 0 0 3rem 3rem" data-placement="top" role="button" data-toggle="popover" data-trigger="focus" data-content="Added to cart!">Add to cart</a>
 }
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/bootstrap")
+
 <script>
     $(function () {
         $(".cart-alert").hide();
@@ -58,4 +57,3 @@
     })
 </script>
 @*<a href="#" class="btn btn-outline-warning d-block shadow-sm" style="border-radius: 0 0 3rem 3rem">Add to cart</a>*@
-
