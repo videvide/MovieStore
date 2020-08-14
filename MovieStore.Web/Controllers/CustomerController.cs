@@ -41,7 +41,7 @@ namespace MovieStore.Web.Controllers
             {
                 _context.Entry(customer).State = EntityState.Modified;
                 _context.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Manage");
             }
             else return View(customer);
         }

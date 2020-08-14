@@ -14,11 +14,10 @@
     <hr />
     <dl class="dl-horizontal">
 
-
         <dd>
             @if (User.IsInRole("Customer"))
             {
-                @Html.ActionLink("Edit your details", "Index", "Customer")
+                @Html.ActionLink("View your details", "Edit", "Customer")
             }
         </dd>
         <dd>
@@ -34,7 +33,6 @@
             {
                 @Html.ActionLink("Create", "SetPassword")
             }
-
         </dd>
         <dd>
             @*@Model.Logins.Count*@
