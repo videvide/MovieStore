@@ -179,6 +179,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MoviesController.cs" />
+    <Compile Include="Controllers\NotFoundController.cs" />
     <Compile Include="DataAccess\CustomerDataAccess.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -403,6 +404,7 @@
     <Content Include="Views\Movies\Search.cshtml" />
     <Content Include="Views\Shared\_MovieSearchPartial.cshtml" />
     <Content Include="Views\Movies\DetailsImdb.cshtml" />
+    <Content Include="Views\NotFound\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MovieStore.Lib\MovieStore.Lib.csproj">
