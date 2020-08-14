@@ -1,4 +1,5 @@
-﻿using MovieStore.Web.Models;
+﻿using MovieStore.Lib.Models;
+using MovieStore.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,14 @@ namespace MovieStore.Web.DataAccess
             }
 
             return output;
+        }
+
+        public Customer GetCustomer (string userId)
+        {
+            var user = _context.Customers.FirstOrDefault(c => c.ApplicationUserId == userId);
+            
+            return user;
+           
         }
     }
 }
