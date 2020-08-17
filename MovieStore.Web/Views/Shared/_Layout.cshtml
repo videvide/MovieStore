@@ -26,8 +26,6 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", new { }, new { @class = "nav-link text-light" })</li>
                 <li class="nav-item">@Html.ActionLink("Top 100", "Top100", "Home", new { }, new { @class = "nav-link text-light text-nowrap" })</li>
-                <li class="nav-item">@Html.ActionLink("About", "About", "Home", new { }, new { @class = "nav-link text-light" })</li>
-                <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Home", new { }, new { @class = "nav-link text-light" })</li>
             </ul>
             @using (Html.BeginForm("Search", "Movies", FormMethod.Post, new { @class = "form-inline my-2 my-lg-0 mr-2 flex w-100 mx-2" }))
             {
@@ -46,10 +44,12 @@
             @Html.ActionLink("Go to checkout.", "Index", "Cart", null, new { @class = " text-dark" })
         </div>
         @RenderBody()
-
         <footer>
-            <hr />
-            <p class="text-warning">&copy; @DateTime.Now.Year - LMDb</p>
+            <div class="d-flex flex-row align-items-center justify-content-center">
+                <p class="text-warning m-0">&copy; @DateTime.Now.Year - LMDb</p>
+                @Html.ActionLink("About", "About", "Home", new { }, new { @class = "nav-link text-warning ml-3" })
+                @Html.ActionLink("Contact", "Contact", "Home", new { }, new { @class = "nav-link text-warning" })
+            </div>
         </footer>
     </div>
 
