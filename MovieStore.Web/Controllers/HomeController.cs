@@ -25,24 +25,45 @@ namespace MovieStore.Web.Controllers
         {
             var movies = _context.Movies.ToList();
 
-            var m = new List<Movie>();
-            var existingMovies = new List<string>();
-            var rnd = new Random();
-            var i = 0;
-            while (i < 12)
+            //var m = new List<Movie>();
+            //var existingMovies = new List<string>();
+            //var rnd = new Random();
+            //var i = 0;
+            //while (i < 12)
+            //{
+            //    var mov = movies[rnd.Next(0, movies.Count)];
+            //    if (!existingMovies.Contains(mov.ImdbID))
+            //    {
+            //        m.Add(mov);
+            //        existingMovies.Add(mov.ImdbID);
+            //        i++;
+            //    }
+            //}
+
+            var topFiveRecent = (from m in movies
+                                 orderby m.ReleaseYear descending
+                                 select m).Take(5).ToList();
+
+            var topFiveOldest = (from m in movies
+                                 orderby m.ReleaseYear ascending
+                                 select m).Take(5).ToList();
+
+            var topFiveCheapest = (from m in movies
+                                   orderby m.Price ascending
+                                   select m).Take(5).ToList();
+
+            var topFivePopular = (from m in movies
+                                  orderby m.Price ascending
+                                  select m).Take(5).ToList();
+
+            var model = new HomeViewModel
             {
-                var mov = movies[rnd.Next(0, movies.Count)];
-                if (!existingMovies.Contains(mov.ImdbID))
-                {
-                    m.Add(mov);
-                    existingMovies.Add(mov.ImdbID);
-                    i++;
-                }
-            }
+                TopFiveRecent = topFiveRecent,
+                TopFiveOldest = topFiveOldest,
+                TopFiveCheapest = topFiveCheapest,
+            };
 
-            ViewBag.Movies = m;
-
-            return View(m);
+            return View(model);
         }
 
         public ActionResult About()
