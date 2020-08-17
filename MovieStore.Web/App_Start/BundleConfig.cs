@@ -28,6 +28,11 @@ namespace MovieStore.Web
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new Bundle("~/Content/Images").Include(
+                    "~/Content/Images/image-icon.svg",
+                    "~/Content/Images/logo.svg"
+                ));
         }
     }
 }
