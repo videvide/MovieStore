@@ -2,6 +2,7 @@
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    padding-bottom: 2.5rem;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists
@@ -18,8 +19,32 @@ textarea {
     max-width: 280px;
 }
 
+footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2.5rem;
+    background-color: #323235;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+    display: table;
+}
+
 body {
     color: #fff;
+    width: 100%;
+    min-height: 100%;
+    display: table-cell;
+    position: relative;
+}
+
+html, body {
+    margin: 0px;
+    padding: 0px;
 }
 
 .bg-dark {
