@@ -58,5 +58,14 @@ namespace MovieStore.Web.Controllers
 
             return View();
         }
+
+        public ActionResult Top100()
+        {
+            var movies = _context.Movies.Take(100).ToList();
+
+            if (movies.Count < 100) return RedirectToAction("Index");
+
+            return View(movies);
+        }
     }
 }

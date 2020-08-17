@@ -417,6 +417,7 @@
     <Content Include="Views\CheckOut\Index.cshtml" />
     <Content Include="Views\Shared\_CustomerDetailsPartial.cshtml" />
     <Content Include="Views\CheckOut\Payment.cshtml" />
+    <Content Include="Views\Home\Top100.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MovieStore.Lib\MovieStore.Lib.csproj">

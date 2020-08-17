@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Movie Store</title>
+    <title>@ViewBag.Title - LMDb</title>
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/Site.css")
     @Scripts.Render("~/bundles/modernizr")
@@ -25,6 +25,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", new { }, new { @class = "nav-link text-light" })</li>
+                <li class="nav-item">@Html.ActionLink("Top 100", "Top100", "Home", new { }, new { @class = "nav-link text-light text-nowrap" })</li>
                 <li class="nav-item">@Html.ActionLink("About", "About", "Home", new { }, new { @class = "nav-link text-light" })</li>
                 <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Home", new { }, new { @class = "nav-link text-light" })</li>
             </ul>
@@ -48,7 +49,7 @@
 
         <footer>
             <hr />
-            <p class="text-warning">&copy; @DateTime.Now.Year - Movie Store</p>
+            <p class="text-warning">&copy; @DateTime.Now.Year - LMDb</p>
         </footer>
     </div>
 
