@@ -22,6 +22,7 @@ namespace MovieStore.Web.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 List<Movie> movies = (List<Movie>)Session["CartMovies"];
+                if (movies == null) return RedirectToAction("Index", "Home");
                 string userId = User.Identity.GetUserId();
                 Customer customer = _context.Customers.FirstOrDefault(cus => cus.ApplicationUserId == userId);
                 CustomerDetailsCheckOutViewModel c = new CustomerDetailsCheckOutViewModel
@@ -82,7 +83,21 @@ namespace MovieStore.Web.Controllers
 
                 _context.Entry(c).State = EntityState.Modified;
                 _context.SaveChanges();
+                Order order = new Order
+                {
+                    OrderDate = DateTime.Now,
+                    CustomerId = customer.Id,
+                                
+                };
+                OrderViewModel orderViewModel = new OrderViewModel
+                {
+                    Customer = c,
+                    Order = order,
+                    Movies = (List<Movie>)Session["CartMovies"]
 
+
+            };
+                TempData["orderViewModel"] = orderViewModel;
                 return RedirectToAction("Payment");
             }
 
@@ -118,7 +133,44 @@ namespace MovieStore.Web.Controllers
         [Authorize(Roles = "Admin,Customer")]
         public ActionResult Payment()
         {
-            return View();
+            
+            if (TempData["orderViewModel"] != null)
+            {
+                return View((OrderViewModel)TempData["orderViewModel"]);
+            }
+
+
+            return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin,Customer")]
+        public ActionResult Payment(Order order)
+        {
+            
+            if (order != null)
+            {
+                _context.Orders.Add(order);
+                _context.SaveChanges();
+                var o = _context.Orders.ToList().LastOrDefault();
+                
+                foreach (var movie in (List<Movie>)Session["CartMovies"])
+                {
+
+                    OrderRows orderRows = new OrderRows
+                    {
+                        MovieId = movie.Id,
+                        OrderId = o.Id,
+                        Price = movie.Price
+                    };
+
+                    _context.OrderRows.Add(orderRows);
+                    _context.SaveChanges();
+                }
+
+            }
+            return RedirectToAction("Index", "OrderRows");
+        }
+
     }
 }

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using System.Web.Management;
 using System.Web.Mvc;
 
 namespace MovieStore.Web.Controllers
@@ -44,6 +45,16 @@ namespace MovieStore.Web.Controllers
                 return RedirectToAction("Index", "Manage");
             }
             else return View(customer);
+        }
+
+        public ActionResult Orders(string success)
+        {
+            if (success == "true")
+            {
+                TempData["Message"] = "Your order has been placed";
+                return RedirectToAction("Orders");
+            }
+            return View();
         }
     }
 }

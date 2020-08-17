@@ -1,0 +1,10 @@
+﻿
+@{
+    ViewBag.Title = "Orders";
+}
+
+<h2>Orders</h2>
+@if (!string.IsNullOrEmpty(TempData["Message"].ToString()))
+{
+    @TempData["Message"];
+}
