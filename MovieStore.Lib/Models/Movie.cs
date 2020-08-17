@@ -11,30 +11,41 @@ namespace MovieStore.Lib.Models
     {
         [Key]
         public int Id { get; set; }
+
         [Required]
         [MaxLength(100)]
-        public string Title { get;  set; }
+        public string Title { get; set; }
+
         [Required]
         [MaxLength(100)]
         public string Director { get; set; }
+
         [Required]
-        public int ReleaseYear { get; set; }
+        [MaxLength(25)]
+        public string ReleaseYear { get; set; }
+
         [Required]
         [DataType(DataType.Currency)]
         public decimal Price { get; set; }
+
         [Required]
         [MaxLength(100)]
         public string Rated { get; set; }
+
         [Required]
         [MaxLength(100)]
         public string Genre { get; set; }
+
         [Required]
         public string Plot { get; set; }
+
         [Required]
         [MaxLength(255)]
         public string Poster { get; set; }
+
         [Required]
         public float ImdbRating { get; set; }
+
         [Required]
         public string ImdbID { get; set; }
     }
