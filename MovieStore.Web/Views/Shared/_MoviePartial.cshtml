@@ -23,6 +23,7 @@
         <h6 class="card-subtitle mb-2 text-muted">Genres: <span class="badge badge-warning">@Model.Genre</span></h6>
         <h6 class="card-subtitle mb-2 text-muted">Rated: <span class="badge badge-warning">@Model.Rated</span></h6>
     </div>
+    <h5 class="card-subtitle text-center text-warning mb-4 d-block"><span class="d-block badge badge-pill badge-dark" style="color: #e0e0e0;">@Model.Price :-</span></h5>
     @using (Html.BeginForm("AddToCart", "Cart", FormMethod.Post, new { id = "addToCartForm" + Model.Id, @class = "navbar-nav navbar-right" }))
     {
         @Html.AntiForgeryToken()
