@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Management;
 using System.Web.Mvc;
+using MovieStore.Web.DataAccess;
 
 namespace MovieStore.Web.Controllers
 {
@@ -47,14 +48,13 @@ namespace MovieStore.Web.Controllers
             else return View(customer);
         }
 
-        public ActionResult Orders(string success)
+        public ActionResult Orders()
         {
-            if (success == "true")
-            {
-                TempData["Message"] = "Your order has been placed";
-                return RedirectToAction("Orders");
-            }
-            return View();
+            var userId = User.Identity.GetUserId();
+            var customerAccess = new CustomerDataAccess();
+            var customer = customerAccess.GetCustomer(userId);
+            var orders = _context.Orders.Where(o => o.CustomerId == (customer.Id));
+            return View(orders);
         }
     }
 }

@@ -11,6 +11,7 @@ namespace MovieStore.Lib.Models
     public class Order
     {
         [Key]
+        [DisplayName("Order id")]
         public int Id { get; set; }
         [Required]
         [DataType(DataType.Date)]

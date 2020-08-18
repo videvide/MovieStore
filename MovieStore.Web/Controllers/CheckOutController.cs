@@ -169,7 +169,8 @@ namespace MovieStore.Web.Controllers
                 }
 
             }
-            return RedirectToAction("Index", "OrderRows");
+            TempData["Message"] = "Your order has been placed!";
+            return RedirectToAction("Orders", "Customer");
         }
 
     }

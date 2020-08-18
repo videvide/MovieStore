@@ -1,10 +1,37 @@
-﻿
+﻿@model IEnumerable<MovieStore.Lib.Models.Order>
 @{
     ViewBag.Title = "Orders";
 }
-
-<h2>Orders</h2>
-@if (!string.IsNullOrEmpty(TempData["Message"].ToString()))
+@if (TempData["Message"] != null)
 {
-    @TempData["Message"];
+
+    <div class="alert alert-warning" role="alert">
+        @TempData["Message"]
+    </div>
 }
+<h2>Orders</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">@Html.DisplayNameFor(model => model.OrderDate)</th>
+            <th scope="col">@Html.DisplayNameFor(model => model.Id)</th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var order in Model)
+        {
+        <tr>
+            <td>@order.OrderDate</td>
+            <td>@order.Id</td>
+        </tr>
+        }
+
+
+    </tbody>
+</table>
+
+@Html.ActionLink("Order details", "Index", "OrderRows")
+
