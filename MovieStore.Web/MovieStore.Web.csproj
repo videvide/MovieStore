@@ -422,6 +422,7 @@
     <Content Include="Views\Home\Top100.cshtml" />
     <Content Include="Views\Customer\Orders.cshtml" />
     <Content Include="Views\Customer\OrderDetails.cshtml" />
+    <Content Include="Views\Admin\Orders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MovieStore.Lib\MovieStore.Lib.csproj">

@@ -76,7 +76,7 @@ namespace MovieStore.Web.Controllers
             {
                 return RedirectToAction("Orders", "Customer");
             }
-            else if (order.CustomerId != customer.Id)
+            else if (order.CustomerId != customer.Id && !User.IsInRole("Admin"))
             {
                 return RedirectToAction("Orders", "Customer");
             }

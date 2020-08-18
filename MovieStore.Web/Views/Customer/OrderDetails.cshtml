@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<MovieStore.Web.Models.MovieCartPartialViewModel>
 
 @{
-    ViewBag.Title = "OrderDetails";
+    ViewBag.Title = "Order Details";
 }
 
-<h2>OrderDetails</h2>
+<h2>Order Details</h2>
 
 <table class="table">
     <tr>
@@ -20,18 +20,29 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Movie.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Count)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalPrice)
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.Movie.Title, "Details", "Movies", new { id = item.Movie.Id }, null)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Count)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalPrice)
+            </td>
+            <td></td>
+        </tr>
+    }
+
 
 </table>
+@{ 
+    decimal totalPrice = 0;
+    foreach(var mov in Model)
+    {
+        totalPrice += mov.TotalPrice;
+    }
+}
+<h3>Order Total: <span class="text-warning">@totalPrice</span></h3>

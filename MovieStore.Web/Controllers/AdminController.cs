@@ -156,5 +156,17 @@ namespace MovieStore.Web.Controllers
         }
 
         #endregion Movie Action
+        public ActionResult Orders()
+        {
+            var orders = _context.Orders.ToList();
+            return View(orders);
+        }
+
+        public ActionResult AdminOrderDetails()
+        {
+            return View();
+        }
     }
+
+
 }
