@@ -72,6 +72,7 @@ namespace MovieStore.Lib.DataAccess
 
         public async Task<List<Movie>> GetTop100Movies()
         {
+            var rnd = new Random();
             var movieIdList = await GetTop100MovieIds();
 
             List<Movie> output = new List<Movie>();
@@ -82,7 +83,7 @@ namespace MovieStore.Lib.DataAccess
                 {
                     Title = m.Title,
                     Director = m.Director,
-                    Price = 199,
+                    Price = rnd.Next(29, 199),
                     ReleaseYear = m.Year,
                     Genre = m.Genre,
                     ImdbID = m.imdbID,

@@ -42,6 +42,7 @@ namespace MovieStore.Web.Controllers
 
         public async Task<ActionResult> DetailsImdb(string id)
         {
+            var rnd = new Random();
             var mov = db.Movies.FirstOrDefault(m => m.ImdbID == id);
 
             if (mov != null)
@@ -68,7 +69,7 @@ namespace MovieStore.Web.Controllers
                     ImdbRating = movieRes.imdbRating,
                     Plot = movieRes.Plot,
                     Poster = _movieAccess.FixPosterURL(movieRes.Poster),
-                    Price = 199,
+                    Price = rnd.Next(29, 199),
                     Rated = movieRes.Rated,
                     ReleaseYear = movieRes.Year,
                     Title = movieRes.Title
