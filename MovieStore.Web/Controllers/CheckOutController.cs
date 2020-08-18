@@ -14,11 +14,12 @@ namespace MovieStore.Web.Controllers
     public class CheckOutController : Controller
     {
         private readonly ApplicationDbContext _context = new ApplicationDbContext();
+
         // GET: CheckOut
         [HttpGet]
         public ActionResult Index()
         {
-            // metod för att visa ordern och be om uppgifter för att slutföra köp 
+            // metod för att visa ordern och be om uppgifter för att slutföra köp
             if (User.Identity.IsAuthenticated)
             {
                 List<Movie> movies = (List<Movie>)Session["CartMovies"];
@@ -39,7 +40,6 @@ namespace MovieStore.Web.Controllers
                     EmailAddress = customer.EmailAddress,
                     PhoneNo = customer.PhoneNo,
                     ApplicationUserId = customer.ApplicationUserId
-
                 };
 
                 CheckOutViewModel model = new CheckOutViewModel
@@ -49,13 +49,11 @@ namespace MovieStore.Web.Controllers
                 };
 
                 return View(model);
-                
-            } 
+            }
             else
             {
-                return RedirectToAction("Login", "Account", new { returnUrl = Url.Action("Index", "CheckOut")});
+                return RedirectToAction("Login", "Account", new { returnUrl = Url.Action("Index", "CheckOut") });
             }
-            
         }
 
         [HttpPost]
@@ -78,7 +76,6 @@ namespace MovieStore.Web.Controllers
                     EmailAddress = customer.EmailAddress,
                     PhoneNo = customer.PhoneNo,
                     ApplicationUserId = customer.ApplicationUserId
-
                 };
 
                 _context.Entry(c).State = EntityState.Modified;
@@ -87,16 +84,13 @@ namespace MovieStore.Web.Controllers
                 {
                     OrderDate = DateTime.Now,
                     CustomerId = customer.Id,
-                                
                 };
                 OrderViewModel orderViewModel = new OrderViewModel
                 {
                     Customer = c,
                     Order = order,
                     Movies = (List<Movie>)Session["CartMovies"]
-
-
-            };
+                };
                 TempData["orderViewModel"] = orderViewModel;
                 return RedirectToAction("Payment");
             }
@@ -118,7 +112,6 @@ namespace MovieStore.Web.Controllers
                 EmailAddress = cust.EmailAddress,
                 PhoneNo = cust.PhoneNo,
                 ApplicationUserId = cust.ApplicationUserId
-
             };
 
             CheckOutViewModel model = new CheckOutViewModel
@@ -133,12 +126,10 @@ namespace MovieStore.Web.Controllers
         [Authorize(Roles = "Admin,Customer")]
         public ActionResult Payment()
         {
-            
             if (TempData["orderViewModel"] != null)
             {
                 return View((OrderViewModel)TempData["orderViewModel"]);
             }
-
 
             return RedirectToAction("Index");
         }
@@ -147,16 +138,14 @@ namespace MovieStore.Web.Controllers
         [Authorize(Roles = "Admin,Customer")]
         public ActionResult Payment(Order order)
         {
-            
             if (order != null)
             {
                 _context.Orders.Add(order);
                 _context.SaveChanges();
                 var o = _context.Orders.ToList().LastOrDefault();
-                
+
                 foreach (var movie in (List<Movie>)Session["CartMovies"])
                 {
-
                     OrderRows orderRows = new OrderRows
                     {
                         MovieId = movie.Id,
@@ -167,11 +156,11 @@ namespace MovieStore.Web.Controllers
                     _context.OrderRows.Add(orderRows);
                     _context.SaveChanges();
                 }
-
             }
+
+            Session["CartMovies"] = null;
             TempData["Message"] = "Your order has been placed!";
             return RedirectToAction("Orders", "Customer");
         }
-
     }
 }
