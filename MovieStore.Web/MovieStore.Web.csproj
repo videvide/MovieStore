@@ -429,7 +429,7 @@
     <Content Include="Views\OrderRows\Edit.cshtml" />
     <Content Include="Views\OrderRows\Index.cshtml" />
     <Content Include="Views\Shared\_MovieCarouselPartial.cshtml" />
-    <Content Include="Views\Shared\_MovieCarouselPartial.cshtml" />
+    <Content Include="Views\Shared\_MoviePartial2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MovieStore.Lib\MovieStore.Lib.csproj">

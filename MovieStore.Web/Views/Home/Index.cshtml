@@ -9,38 +9,47 @@
     <img id="logo" style="max-width: 10rem" src="@Url.Content("~/Content/Images/logo.svg")" alt="Logo" />
 </div>
 
-@if (Model.TopFiveRecent.Count > 0)
-{
-    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-            @for (int i = 0; i < Model.TopFiveRecent.Count; i++)
-            {
-                if (i == 0)
-                {
-                    <div class="carousel-item active">
-                        @Html.Partial("_MovieCarouselPartial", Model.TopFiveRecent[i])
-                    </div>
-                }
-                else
-                {
-                    <div class="carousel-item">
-                        @Html.Partial("_MovieCarouselPartial", Model.TopFiveRecent[i])
-                    </div>
-                }
-            }
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    </div>
-}
+<h1 class="text-center mt-4">Top 5 Recent</h1>
+<div class="row align-items-stretch align-content-stretch justify-content-center">
+    @if (Model.TopFiveRecent.Count > 0)
+    {
+        foreach (var movie in Model.TopFiveRecent)
+        {
+            @Html.Partial("_MoviePartial", movie)
+        }
+    }
+</div>
 
-<div class="row align-items-stretch align-content-stretch justify-content-around">
+<div class="my-4" style="padding-bottom: 2px; background-color: #ffc107;"></div>
+
+<h1 class="text-center">Top 5 Popular</h1>
+<div class="row align-items-stretch align-content-stretch justify-content-center">
+    @if (Model.TopFivePopular.Count > 0)
+    {
+        foreach (var movie in Model.TopFivePopular)
+        {
+            @Html.Partial("_MoviePartial", movie)
+        }
+    }
+</div>
+
+<div class="my-4" style="padding-bottom: 2px; background-color: #ffc107;"></div>
+
+<h1 class="text-center">Top 5 Cheapest</h1>
+<div class="row align-items-stretch align-content-stretch justify-content-center">
+    @if (Model.TopFiveCheapest.Count > 0)
+    {
+        foreach (var movie in Model.TopFiveCheapest)
+        {
+            @Html.Partial("_MoviePartial", movie)
+        }
+    }
+</div>
+
+<div class="my-4" style="padding-bottom: 2px; background-color: #ffc107;"></div>
+
+<h1 class="text-center">Top 5 Oldest</h1>
+<div class="row align-items-stretch align-content-stretch justify-content-center">
     @if (Model.TopFiveOldest.Count > 0)
     {
         foreach (var movie in Model.TopFiveOldest)
@@ -49,13 +58,3 @@
         }
     }
 </div>
-
-<div class="row align-items-stretch align-content-stretch justify-content-around">
-    @if (Model.TopFiveCheapest.Count > 0)
-    {
-        foreach (var movie in Model.TopFiveCheapest)
-        {
-            @Html.Partial("_MoviePartial", movie)
-        }
-    }
-</div>TopFiveCheapest

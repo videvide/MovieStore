@@ -52,15 +52,22 @@ namespace MovieStore.Web.Controllers
                                    orderby m.Price ascending
                                    select m).Take(5).ToList();
 
-            var topFivePopular = (from m in movies
-                                  orderby m.Price ascending
-                                  select m).Take(5).ToList();
+            var topFivePopularGrouped = (from or in _context.OrderRows
+                                         group or by or.MovieId).OrderByDescending(l => l.Count()).Take(5).ToList();
+
+            List<Movie> topFivePopular = new List<Movie>();
+
+            foreach (var group in topFivePopularGrouped)
+            {
+                topFivePopular.Add(group.FirstOrDefault().Movie);
+            }
 
             var model = new HomeViewModel
             {
                 TopFiveRecent = topFiveRecent,
                 TopFiveOldest = topFiveOldest,
                 TopFiveCheapest = topFiveCheapest,
+                TopFivePopular = topFivePopular
             };
 
             return View(model);

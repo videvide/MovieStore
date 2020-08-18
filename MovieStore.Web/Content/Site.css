@@ -1,4 +1,6 @@
-﻿/* Set padding to keep content from hitting the edges */
+﻿@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+
+/* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
@@ -155,6 +157,7 @@ th {
 }
 
 #brand-name {
+    font-family: 'Audiowide', 'Segoe UI';
     visibility: hidden;
     opacity: 0;
     animation: animateBrand 1s ease forwards 0.75s;
@@ -214,4 +217,3 @@ th {
 .card {
     max-width: 75%;
 }
-
