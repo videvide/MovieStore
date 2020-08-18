@@ -27,7 +27,7 @@
         <tr>
             <td>@order.OrderDate</td>
             <td>@order.Id</td>
-            <td>@Html.ActionLink("Order details", "Index", "OrderRows")</td>
+            <td>@Html.ActionLink("Order details", "OrderDetails", "Customer", new { id = order.Id}, null)</td>
         </tr>
         }
 
