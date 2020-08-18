@@ -12,6 +12,7 @@ using MovieStore.Web.DataAccess;
 
 namespace MovieStore.Web.Controllers
 {
+    [Authorize(Roles = "Admin,Customer")]
     public class CustomerController : Controller
     {
         private readonly ApplicationDbContext _context = new ApplicationDbContext();
@@ -47,7 +48,7 @@ namespace MovieStore.Web.Controllers
             }
             else return View(customer);
         }
-
+        
         public ActionResult Orders()
         {
             var userId = User.Identity.GetUserId();

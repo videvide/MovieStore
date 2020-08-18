@@ -16,6 +16,7 @@
         <tr>
             <th scope="col">@Html.DisplayNameFor(model => model.OrderDate)</th>
             <th scope="col">@Html.DisplayNameFor(model => model.Id)</th>
+            <th scope="col"></th>
 
         </tr>
     </thead>
@@ -26,6 +27,7 @@
         <tr>
             <td>@order.OrderDate</td>
             <td>@order.Id</td>
+            <td>@Html.ActionLink("Order details", "Index", "OrderRows")</td>
         </tr>
         }
 
@@ -33,5 +35,5 @@
     </tbody>
 </table>
 
-@Html.ActionLink("Order details", "Index", "OrderRows")
+
 
