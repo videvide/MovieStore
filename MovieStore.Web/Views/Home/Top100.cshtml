@@ -3,17 +3,17 @@
 @{
     ViewBag.Title = "Top100";
 }
-
-<div class="jumbotron bg-secondary my-2 d-flex align-items-center justify-content-center">
-    <h1 class="text-warning display-1">Top 100</h1>
+<div class="container">
+    <div class="jumbotron bg-secondary my-2 d-flex align-items-center justify-content-center">
+        <h1 class="text-warning display-1"><i class="fas fa-star mr-1 text-warning" style="padding: 0.2rem 0rem; margin: 0rem 1rem;"></i>Top 100<i class="fas fa-star mr-1 text-warning" style="padding: 0.2rem 0rem; margin: 0rem 1rem;"></i></h1>
+    </div>
 </div>
-
-<div class="row align-items-stretch align-content-stretch justify-content-around">
-    @if (Model.Count > 0)
-    {
-        foreach (var movie in Model)
+    <div class="row align-items-stretch align-content-stretch justify-content-around">
+        @if (Model.Count > 0)
         {
-            @Html.Partial("_MoviePartial", movie)
+            foreach (var movie in Model)
+            {
+                @Html.Partial("_Top100MoviePartial", movie)
+            }
         }
-    }
-</div>
+    </div>

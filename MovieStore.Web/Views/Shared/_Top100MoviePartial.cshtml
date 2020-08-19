@@ -1,0 +1,69 @@
+﻿@model MovieStore.Lib.Models.Movie
+
+<div class="card bg-secondary text-light col-12 col-lg-2 col-md-3 col-sm-4 my-4 py-4 px-2 mx-1" style="min-width: 15%;">
+    <img class="card-img-top img-fluid rounded-0" src="@Model.Poster" alt="Card image cap" loading="lazy">
+    <h5 class="card-subtitle text-center text-warning d-block mb-1"><span class="d-block badge rounded-0 badge-dark px-2"><i class="fas fa-star mr-1 text-warning" style="padding: 0.2rem 0rem;"></i>@Model.ImdbRating <small class="text-secondary">/ 10</small></span></h5>
+    <h5 class="card-subtitle text-center text-warning d-block"><span class="d-block badge rounded-0 badge-dark px-2 text-warning border-top border-secondary" style="color: #e0e0e0; padding: 0.35rem 0rem;">@Model.Price :-</span></h5>
+    @using (Html.BeginForm("AddToCart", "Cart", FormMethod.Post, new { id = "addToCartForm" + Model.Id, @class = "navbar-nav navbar-right d-flex flex-row justify-content-center" }))
+    {
+        <a tabindex="0" id="addToCartSubmit@(Model.Id)" class="w-50 btn border-right-0 btn-outline-warning rounded-0 float-left addToCartBtn py-1" data-placement="top" role="button" data-toggle="popover" data-trigger="focus" data-content="Added to cart!"><i class="fas fa-cart-plus"></i></a>
+        <a href="@Url.Action("Details", "Movies", new { id = Model.Id })" class="w-50 btn rounded-0 btn-outline-warning float-right py-1"><i class="fas fa-info"></i></a>
+
+        @Html.AntiForgeryToken()
+        <input name="movieId" type="hidden" value="@Model.Id" />
+    }
+    @*<div class="card-body">
+            <h5 class="card-title">@Model.Title</h5>
+            <h6 class="card-subtitle mb-2 text-muted">IMDb Rating <span class="badge badge-warning">@Model.ImdbRating</span></h6>
+        </div>*@
+    @*@using (Html.BeginForm("AddToCart", "Cart", FormMethod.Post, new { id = "addToCartForm" + Model.Id, @class = "navbar-nav navbar-right" }))
+        {
+            @Html.AntiForgeryToken()
+            <input name="movieId" type="hidden" value="@Model.Id" />
+
+            <div class="card-footer bg-secondary d-flex flex-column">
+                <a tabindex="0" id="addToCartSubmit@(Model.Id)" class="btn btn-outline-warning float-left addToCartBtn mb-3 py-1" data-placement="top" role="button" data-toggle="popover" data-trigger="focus" data-content="Added to cart!">Add to cart</a>
+                @Html.ActionLink("Details", "Details", "Movies", new { id = Model.Id }, new { @class = "btn btn-outline-warning float-right py-1" })
+            </div>
+
+        }*@
+</div>
+
+<style>
+    .popover {
+        background: #ffc107;
+        border: solid 5px #ffc107;
+    }
+</style>
+
+<script>
+    $(function () {
+        $(".cart-alert").hide();
+        $('#addToCartSubmit@(Model.Id)').click(async function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("AddToCart", "Cart")',
+                data: {
+                    __RequestVerificationToken: document.getElementsByName("__RequestVerificationToken")[0].value,
+                    movieId: @Model.Id
+                },
+                success: function(res) {
+                    console.log(res);
+                    $("#cartAmount").text(res);
+                }
+            });
+
+            $(".fa-shopping-cart").toggleClass("animate");
+            setTimeout(function () {
+                $(".fa-shopping-cart").toggleClass("animate");
+            }, 500);
+
+            $(".cart-alert").show().animate({ opacity: 1 }, 250);
+            await setTimeout(function () {
+                $(".cart-alert").animate({ opacity: 0 }, 250).hide();
+            }, 4000)
+            return false;
+        });
+    })
+</script>

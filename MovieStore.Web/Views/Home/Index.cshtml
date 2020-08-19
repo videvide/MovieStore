@@ -9,7 +9,7 @@
         <img id="logo" style="max-width: 10rem" src="@Url.Content("~/Content/Images/logo.svg")" alt="Logo" />
     </div>
 </div>
-<h1 class="text-center mt-2 display-4">Top 6 Recent</h1>
+<h1 class="text-center mt-3 display-4">Top 6 Recent</h1>
 <div class="row align-items-stretch align-content-stretch justify-content-center">
     @if (Model.TopFiveRecent.Count > 0)
     {
@@ -22,7 +22,7 @@
 
 @*<div class="my-4" style="padding-bottom: 2px; background-color: #ffc107;"></div>*@
 
-<h1 class="text-center display-4">Top 6 Popular</h1>
+<h1 class="text-center mt-3 display-4">Top 6 Popular</h1>
 <div class="row align-items-stretch align-content-stretch justify-content-center">
     @if (Model.TopFivePopular.Count > 0)
     {
@@ -35,7 +35,7 @@
 
 @*<div class="my-4" style="padding-bottom: 2px; background-color: #ffc107;"></div>*@
 
-<h1 class="text-center display-4">Top 6 Cheapest</h1>
+<h1 class="text-center mt-3 display-4">Top 6 Cheapest</h1>
 <div class="row align-items-stretch align-content-stretch justify-content-center">
     @if (Model.TopFiveCheapest.Count > 0)
     {
@@ -48,7 +48,7 @@
 
 @*<div class="my-4" style="padding-bottom: 2px; background-color: #ffc107;"></div>*@
 
-<h1 class="text-center display-4">Top 6 Oldest</h1>
+<h1 class="text-center mt-3 display-4">Top 6 Oldest</h1>
 <div class="row align-items-stretch align-content-stretch justify-content-center">
     @if (Model.TopFiveOldest.Count > 0)
     {
