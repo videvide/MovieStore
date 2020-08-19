@@ -1,6 +1,6 @@
 ﻿@model MovieStore.Lib.Models.Movie
 
-<div class="card bg-secondary text-light col-12 col-lg-2 col-md-4 col-sm-4 my-4 py-4" style="min-width: 15%;">
+<div class="card bg-secondary text-light col-12 col-lg-2 col-md-4 col-sm-4 my-4 py-4 px-2" style="min-width: 15%;">
     <img class="card-img-top img-fluid rounded-0" src="@Model.Poster" alt="Card image cap" loading="lazy">
     <h5 class="card-subtitle text-center text-warning d-block mb-1"><span class="d-block badge rounded-0 badge-dark px-2"><i class="fas fa-star mr-1 text-warning" style="padding: 0.2rem 0rem;"></i>@Model.ImdbRating <small class="text-secondary">/ 10</small></span></h5>
     <h5 class="card-subtitle text-center text-warning d-block"><span class="d-block badge rounded-0 badge-dark px-2 text-warning border-top border-secondary" style="color: #e0e0e0; padding: 0.35rem 0rem;">@Model.Price :-</span></h5>

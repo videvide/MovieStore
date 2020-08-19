@@ -66,8 +66,8 @@ html, body {
     margin: 0;
 }
 
-body > .container {
-    margin-top: 5rem;
+body > .body-content {
+    margin-top: 6rem;
 }
 
 .cart-alert {
@@ -176,7 +176,10 @@ th {
 
     .body-content > .jumbotron {
         display: none !important;
+        margin-top: 2rem !important;
     }
+
+
 
     .body-content {
         margin-top: 3rem !important;
@@ -216,4 +219,8 @@ th {
 
 .card {
     max-width: 75%;
+}
+
+.top-text {
+    font-weight:300;
 }
