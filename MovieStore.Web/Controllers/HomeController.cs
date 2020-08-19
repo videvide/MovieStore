@@ -42,18 +42,18 @@ namespace MovieStore.Web.Controllers
 
             var topFiveRecent = (from m in movies
                                  orderby m.ReleaseYear descending
-                                 select m).Take(5).ToList();
+                                 select m).Take(6).ToList();
 
             var topFiveOldest = (from m in movies
                                  orderby m.ReleaseYear ascending
-                                 select m).Take(5).ToList();
+                                 select m).Take(6).ToList();
 
             var topFiveCheapest = (from m in movies
                                    orderby m.Price ascending
-                                   select m).Take(5).ToList();
+                                   select m).Take(6).ToList();
 
             var topFivePopularGrouped = (from or in _context.OrderRows
-                                         group or by or.MovieId).OrderByDescending(l => l.Count()).Take(5).ToList();
+                                         group or by or.MovieId).OrderByDescending(l => l.Count()).Take(6).ToList();
 
             List<Movie> topFivePopular = new List<Movie>();
 
