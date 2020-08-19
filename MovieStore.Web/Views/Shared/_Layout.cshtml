@@ -43,7 +43,9 @@
             Added! <br />
             @Html.ActionLink("Go to checkout.", "Index", "Cart", null, new { @class = " text-dark" })
         </div>
-        @RenderBody()
+        <div class="container">
+            @RenderBody()
+        </div>
         <footer>
             <div class="d-flex flex-row align-items-center justify-content-center">
                 <p class="text-warning m-0">&copy; @DateTime.Now.Year - LMDb</p>
