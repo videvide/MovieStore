@@ -17,10 +17,11 @@ namespace MovieStore.Web.Controllers
     {
         private readonly ApplicationDbContext _context = new ApplicationDbContext();
         private readonly CustomerDataAccess _customerDataAccess = new CustomerDataAccess();
+
         // GET: Customer
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "Manage");
         }
 
         public ActionResult Edit()
@@ -48,7 +49,7 @@ namespace MovieStore.Web.Controllers
             }
             else return View(customer);
         }
-        
+
         public ActionResult Orders()
         {
             var userId = User.Identity.GetUserId();
@@ -62,9 +63,9 @@ namespace MovieStore.Web.Controllers
         {
             var userId = User.Identity.GetUserId();
             var customer = _customerDataAccess.GetCustomer(userId);
-            if(customer == null)
+            if (customer == null)
             {
-                return RedirectToAction("Login", "Account", new { returnUrl = Url.Action("OrderDetails", "Customers", new { id}) });
+                return RedirectToAction("Login", "Account", new { returnUrl = Url.Action("OrderDetails", "Customers", new { id }) });
             }
             if (id == null)
             {
@@ -81,7 +82,7 @@ namespace MovieStore.Web.Controllers
                 return RedirectToAction("Orders", "Customer");
             }
             List<OrderRows> orderRows = _context.OrderRows.Where(or => or.OrderId == order.Id).ToList();
-           
+
             if (orderRows == null)
             {
                 return RedirectToAction("Orders", "Customer");
@@ -97,7 +98,7 @@ namespace MovieStore.Web.Controllers
                 {
                     int count = 0;
                     decimal totalPrice = 0;
-                    foreach(OrderRows o in orderRows.Where(or => or.MovieId == orderRow.MovieId).ToList())
+                    foreach (OrderRows o in orderRows.Where(or => or.MovieId == orderRow.MovieId).ToList())
                     {
                         totalPrice += _context.Movies.FirstOrDefault(m => m.Id == o.MovieId).Price;
                         count++;
@@ -108,34 +109,12 @@ namespace MovieStore.Web.Controllers
                         Movie = movie,
                         Count = count,
                         TotalPrice = totalPrice
-
                     };
                     model.Add(obj);
                 }
             }
 
             return View(model);
-
-
-            //var userId = User.Identity.GetUserId();
-            //var customerAccess = new CustomerDataAccess();
-            //var customer = customerAccess.GetCustomer(userId);
-            //var orders = _context.Orders.Where(o => o.CustomerId == (customer.Id));
-            
-            //List<int> orderId = new List<int>();
-            //foreach(Order order in orders)
-            //{
-            //    orderId.Add(order.Id);
-            //}
-
-            //List<OrderRows> orderRows = new List<OrderRows>();
-            //foreach(var id in orderId)
-            //{
-                
-            //   _context.OrderRows.Where(or => or.Id == (id));
-            //}
-            
-            //return View(orderRows);
         }
     }
 }

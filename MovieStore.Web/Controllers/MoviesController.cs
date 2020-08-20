@@ -19,10 +19,15 @@ namespace MovieStore.Web.Controllers
         private readonly OMDBDataAccess _movieAccess = new OMDBDataAccess();
 
         // GET: Movies
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         public ActionResult Index()
         {
-            return View(db.Movies.ToList());
+            if (User.IsInRole("Admin"))
+            {
+                return View(db.Movies.ToList());
+            }
+
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: Movies/Details/5
@@ -92,10 +97,15 @@ namespace MovieStore.Web.Controllers
         }
 
         // GET: Movies/Create
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         public ActionResult Create()
         {
-            return View();
+            if (User.IsInRole("Admin"))
+            {
+                return View();
+            }
+
+            return RedirectToAction("Index", "Home");
         }
 
         // POST: Movies/Create
