@@ -1,0 +1,43 @@
+﻿@model IEnumerable<MovieStore.Lib.Models.Order>
+@{
+    ViewBag.Title = "Orders";
+}
+@if (TempData["Message"] != null)
+{
+
+    <div class="alert alert-warning" role="alert">
+        @TempData["Message"]
+    </div>
+}
+<div class="mt-4 text-center">
+    <h2>Orders</h2>
+</div>
+    @Html.ActionLink("Back to user page ", "Index", "Manage", new { }, new { @class = "text-Warning" })<i class="fas fa-door-open text-warning"></i>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">@Html.DisplayNameFor(model => model.OrderDate)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.Id)</th>
+                <th scope="col"></th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <td>@order.OrderDate</td>
+                    <td>@order.Id</td>
+                    <td>@Html.ActionLink("Order details", "OrderDetails", "Customer", new { id = order.Id }, null)</td>
+                </tr>
+            }
+
+
+        </tbody>
+    </table>
+
+
+
+
+

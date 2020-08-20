@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Movie Store</title>
+    <title>@ViewBag.Title - LMDb</title>
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/Site.css")
     @Scripts.Render("~/bundles/modernizr")
@@ -25,8 +25,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", new { }, new { @class = "nav-link text-light" })</li>
-                <li class="nav-item">@Html.ActionLink("About", "About", "Home", new { }, new { @class = "nav-link text-light" })</li>
-                <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Home", new { }, new { @class = "nav-link text-light" })</li>
+                <li class="nav-item">@Html.ActionLink("Top 100", "Top100", "Home", new { }, new { @class = "nav-link text-light text-nowrap" })</li>
             </ul>
             @using (Html.BeginForm("Search", "Movies", FormMethod.Post, new { @class = "form-inline my-2 my-lg-0 mr-2 flex w-100 mx-2" }))
             {
@@ -39,16 +38,20 @@
             @Html.Partial("_LoginPartial")
         </div>
     </nav>
-    <div class="container body-content">
+    <div class="body-content container">
         <div class="alert alert-warning bg-warning border-0 text-dark cart-alert" style="display: none; opacity: 0;" role="alert">
             Added! <br />
             @Html.ActionLink("Go to checkout.", "Index", "Cart", null, new { @class = " text-dark" })
         </div>
+
         @RenderBody()
 
         <footer>
-            <hr />
-            <p class="text-warning">&copy; @DateTime.Now.Year - Movie Store</p>
+            <div class="d-flex flex-row align-items-center justify-content-center">
+                <p class="text-warning m-0">&copy; @DateTime.Now.Year - LMDb</p>
+                @Html.ActionLink("About", "About", "Home", new { }, new { @class = "nav-link text-warning ml-3" })
+                @Html.ActionLink("Contact", "Contact", "Home", new { }, new { @class = "nav-link text-warning" })
+            </div>
         </footer>
     </div>
 

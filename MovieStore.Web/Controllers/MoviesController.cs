@@ -19,10 +19,15 @@ namespace MovieStore.Web.Controllers
         private readonly OMDBDataAccess _movieAccess = new OMDBDataAccess();
 
         // GET: Movies
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         public ActionResult Index()
         {
-            return View(db.Movies.ToList());
+            if (User.IsInRole("Admin"))
+            {
+                return View(db.Movies.ToList());
+            }
+
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: Movies/Details/5
@@ -42,6 +47,7 @@ namespace MovieStore.Web.Controllers
 
         public async Task<ActionResult> DetailsImdb(string id)
         {
+            var rnd = new Random();
             var mov = db.Movies.FirstOrDefault(m => m.ImdbID == id);
 
             if (mov != null)
@@ -68,7 +74,7 @@ namespace MovieStore.Web.Controllers
                     ImdbRating = movieRes.imdbRating,
                     Plot = movieRes.Plot,
                     Poster = _movieAccess.FixPosterURL(movieRes.Poster),
-                    Price = 199,
+                    Price = rnd.Next(29, 199),
                     Rated = movieRes.Rated,
                     ReleaseYear = movieRes.Year,
                     Title = movieRes.Title
@@ -91,10 +97,15 @@ namespace MovieStore.Web.Controllers
         }
 
         // GET: Movies/Create
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         public ActionResult Create()
         {
-            return View();
+            if (User.IsInRole("Admin"))
+            {
+                return View();
+            }
+
+            return RedirectToAction("Index", "Home");
         }
 
         // POST: Movies/Create

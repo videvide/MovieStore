@@ -1,7 +1,72 @@
-﻿
+﻿@model MovieStore.Web.Models.OrderViewModel
+
+
+@using Microsoft.AspNet.Identity;
+@using MovieStore.Web.DataAccess;
+@using MovieStore.Web.Models;
 @{
     ViewBag.Title = "Payment";
+    decimal totalPrice = 0;
+    List<string> moviesChecked = new List<string>(); 
+    foreach(var movie in Model.Movies)
+    {
+        totalPrice += movie.Price;
+    }
 }
 
 <h2>Payment</h2>
 
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Details</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Order.Id)
+    @Html.HiddenFor(model => model.Order.CustomerId)
+    @Html.HiddenFor(model => model.Order.OrderDate)
+
+    <div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Product</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+
+                @foreach (MovieStore.Lib.Models.Movie movie in Model.Movies)
+                {
+                     
+                
+                     
+                int movieCount = Model.Movies.Count(m => m.ImdbID == movie.ImdbID);
+
+                if (!moviesChecked.Contains(movie.ImdbID))
+                {
+                    moviesChecked.Add(movie.ImdbID);
+                    <tr>
+                        <td>@movie.Title</td>
+                        <td>@movieCount</td>
+                        <td>@movie.Price</td>
+                    </tr>
+                }
+            }
+            </tbody>
+        </table>
+            <h2 class="text-light">Order Total <span class="text-warning">@totalPrice</span></h2>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Confirm your order" class="btn btn-warning" />
+        </div>
+    </div>
+
+</div>
+}

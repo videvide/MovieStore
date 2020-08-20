@@ -11,7 +11,7 @@ namespace MovieStore.Lib.Models
     public class MovieResponse
     {
         public string Title { get; set; }
-        public int Year { get; set; }
+        public string Year { get; set; }
         public string Rated { get; set; }
         public string Genre { get; set; }
         public string Director { get; set; }

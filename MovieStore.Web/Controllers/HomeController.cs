@@ -25,24 +25,52 @@ namespace MovieStore.Web.Controllers
         {
             var movies = _context.Movies.ToList();
 
-            var m = new List<Movie>();
-            var existingMovies = new List<string>();
-            var rnd = new Random();
-            var i = 0;
-            while (i < 12)
+            //var m = new List<Movie>();
+            //var existingMovies = new List<string>();
+            //var rnd = new Random();
+            //var i = 0;
+            //while (i < 12)
+            //{
+            //    var mov = movies[rnd.Next(0, movies.Count)];
+            //    if (!existingMovies.Contains(mov.ImdbID))
+            //    {
+            //        m.Add(mov);
+            //        existingMovies.Add(mov.ImdbID);
+            //        i++;
+            //    }
+            //}
+
+            var topFiveRecent = (from m in movies
+                                 orderby m.ReleaseYear descending
+                                 select m).Take(6).ToList();
+
+            var topFiveOldest = (from m in movies
+                                 orderby m.ReleaseYear ascending
+                                 select m).Take(6).ToList();
+
+            var topFiveCheapest = (from m in movies
+                                   orderby m.Price ascending
+                                   select m).Take(6).ToList();
+
+            var topFivePopularGrouped = (from or in _context.OrderRows
+                                         group or by or.MovieId).OrderByDescending(l => l.Count()).Take(6).ToList();
+
+            List<Movie> topFivePopular = new List<Movie>();
+
+            foreach (var group in topFivePopularGrouped)
             {
-                var mov = movies[rnd.Next(0, movies.Count)];
-                if (!existingMovies.Contains(mov.ImdbID))
-                {
-                    m.Add(mov);
-                    existingMovies.Add(mov.ImdbID);
-                    i++;
-                }
+                topFivePopular.Add(group.FirstOrDefault().Movie);
             }
 
-            ViewBag.Movies = m;
+            var model = new HomeViewModel
+            {
+                TopFiveRecent = topFiveRecent,
+                TopFiveOldest = topFiveOldest,
+                TopFiveCheapest = topFiveCheapest,
+                TopFivePopular = topFivePopular
+            };
 
-            return View(m);
+            return View(model);
         }
 
         public ActionResult About()
@@ -57,6 +85,15 @@ namespace MovieStore.Web.Controllers
             ViewBag.Message = "Contact us";
 
             return View();
+        }
+
+        public ActionResult Top100()
+        {
+            var movies = _context.Movies.Take(100).ToList();
+
+            if (movies.Count < 100) return RedirectToAction("Index");
+
+            return View(movies);
         }
     }
 }

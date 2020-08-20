@@ -1,0 +1,52 @@
+﻿@model IEnumerable<MovieStore.Web.Models.MovieCartPartialViewModel>
+
+@{
+    ViewBag.Title = "Order Details";
+}
+<div class="mt-4 text-center">
+    <h2>Order Details</h2>
+</div>
+@Html.ActionLink("Back to user page ", "Index", "Manage", new { }, new { @class = "text-Warning" })<i class="fas fa-door-open text-warning"></i>
+@if (User.IsInRole("Admin")) { 
+<a href="@Url.Action("Index", "Admin")">Back to Admin Page <i class="fas fa-door-open text-warning"></i></a>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Movie.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Count)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalPrice)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.Movie.Title, "Details", "Movies", new { id = item.Movie.Id }, null)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Count)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalPrice)
+            </td>
+            <td></td>
+        </tr>
+    }
+
+
+</table>
+@{
+    decimal totalPrice = 0;
+    foreach (var mov in Model)
+    {
+        totalPrice += mov.TotalPrice;
+    }
+}
+<h3>Order Total: <span class="text-warning">@totalPrice</span></h3>

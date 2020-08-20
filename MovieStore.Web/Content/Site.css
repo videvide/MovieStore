@@ -1,7 +1,10 @@
-﻿/* Set padding to keep content from hitting the edges */
+﻿@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+
+/* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    padding-bottom: 2.5rem;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists
@@ -18,8 +21,32 @@ textarea {
     max-width: 280px;
 }
 
+footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2.5rem;
+    background-color: #323235;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+    display: table;
+}
+
 body {
     color: #fff;
+    width: 100%;
+    min-height: 100%;
+    display: table-cell;
+    position: relative;
+}
+
+html, body {
+    margin: 0px;
+    padding: 0px;
 }
 
 .bg-dark {
@@ -39,8 +66,9 @@ body {
     margin: 0;
 }
 
-body > .container {
-    margin-top: 5rem;
+body > .body-content {
+    margin-top: 6rem;
+    margin-bottom: 1rem;
 }
 
 .cart-alert {
@@ -130,11 +158,16 @@ th {
 }
 
 #brand-name {
+    font-family: 'Audiowide', 'Segoe UI';
     visibility: hidden;
     opacity: 0;
     animation: animateBrand 1s ease forwards 0.75s;
     position: relative;
     left: -5%;
+}
+
+#top-100-brand {
+    font-family: 'Audiowide', 'Segoe UI';
 }
 
 @media only screen and (max-width: 991px) {
@@ -146,16 +179,34 @@ th {
         display: none;
     }
 
-    .body-content > .jumbotron {
+    .container > .jumbotron {
         display: none !important;
+        margin-top: 2rem !important;
     }
 
     .body-content {
-        margin-top: 3rem !important;
+        margin-top: 5rem !important;
     }
 
     .card {
         min-width: 45% !important;
+    }
+
+    .navbar-collapse ul li {
+        text-align: center;
+    }
+
+    input[name~="query"] {
+        width: unset;
+        margin-right: 0.5rem;
+    }
+
+    #cartBtn {
+        margin-bottom: 0.5rem;
+    }
+
+    form > ul li .dropdown-menu-right {
+        text-align: center;
     }
 }
 
@@ -189,3 +240,4 @@ th {
 .card {
     max-width: 75%;
 }
+

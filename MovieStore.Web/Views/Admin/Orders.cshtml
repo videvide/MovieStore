@@ -1,0 +1,44 @@
+﻿@model IEnumerable<MovieStore.Lib.Models.Order>
+@using Microsoft.AspNet.Identity;
+@using MovieStore.Web.DataAccess;
+@using MovieStore.Web.Models;
+@{
+    ViewBag.Title = "Orders";
+
+}
+<div class="mt-4 text-center">
+    <h2>Orders</h2>
+</div>
+    <a href="@Url.Action("Index")">Back to Admin Page <i class="fas fa-door-open text-warning"></i></a>
+    <table class="table">
+        <tr>
+            <th>
+                <p class="text-warning">Customer</p>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDate)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+
+            var c = new MovieStore.Web.DataAccess.CustomerDataAccess();
+            var customer = c.GetCustomerByCustomerId(item.CustomerId);
+
+            <tr>
+                <td>
+                    @Html.ActionLink(customer.FirstName + " " + customer.LastName, "CustomerDetails", "Admin", new { id = item.CustomerId }, null)
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderDate)
+                </td>
+                <td>
+                    @Html.ActionLink("Order details", "OrderDetails", "Customer", new { id = item.Id }, new { @class = "text-warning" })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    @Html.Partial("~/Views/Shared/_UpToTopBtnPartial.cshtml")

@@ -8,10 +8,4 @@
         <h6 class="text-secondary">Amount:<span class="text-light"> @Model.Count </span></h6>
         <h6 class="text-secondary">Total:<span class="text-light"> @Model.TotalPrice </span></h6>
     </div>
-    <div class="ml-auto align-self-center">
-        <a href="@Url.Action("Remove", new { movieId = Model.Movie.Id })" class="mx-2 text-danger"><i class="fas fa-minus fa-2x"></i></a>
-        <a href="@Url.Action("Add", new { movieId = Model.Movie.Id })" class="mx-2 text-success"><i class="fas fa-plus fa-2x"></i></a>
-    </div>
 </div>
-
-@*<div style="padding-bottom: 1px; background-color: #ffc107; margin-bottom: 1.5rem"></div>*@

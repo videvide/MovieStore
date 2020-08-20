@@ -31,5 +31,11 @@ namespace MovieStore.Web.DataAccess
             return user;
            
         }
+
+        public Customer GetCustomerByCustomerId(int customerId)
+        {
+            var user = _context.Customers.FirstOrDefault(c => c.Id == customerId);
+            return user;
+        }
     }
 }

@@ -1,7 +1,7 @@
 ﻿@model List<MovieStore.Lib.Models.Movie>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Cart";
 }
 
 <h1 class="mb-4 text-warning">Cart</h1>
@@ -15,7 +15,7 @@
     }
 
     @*<h3>Total: @totalPrice kr</h3>*@
-    <div class="flex-column">
+    <div class="row justify-content-center align-items-stretch mx-2">
 
         @{
             List<string> moviesChecked = new List<string>();
@@ -54,7 +54,7 @@
             }
         }
     </div>
-    <h3>Order total: @totalPrice kr</h3>
+    <h3>Order total: <span class="text-warning">@totalPrice kr</span></h3>
     @Html.ActionLink("Continue to checkout", "Index", "CheckOut", null, new { @class = "btn btn-outline-warning d-block mb-4" })
     @Html.ActionLink("Remove all from cart", "RemoveAll", null, new { @class = "btn btn-outline-warning d-block" })
 }
