@@ -3,9 +3,13 @@
 @{
     ViewBag.Title = "Order Details";
 }
-
-<h2>Order Details</h2>
-
+<div class="mt-4 text-center">
+    <h2>Order Details</h2>
+</div>
+@Html.ActionLink("Back to user page ", "Index", "Manage", new { }, new { @class = "text-Warning" })<i class="fas fa-door-open text-warning"></i>
+@if (User.IsInRole("Admin")) { 
+<a href="@Url.Action("Index", "Admin")">Back to Admin Page <i class="fas fa-door-open text-warning"></i></a>
+}
 <table class="table">
     <tr>
         <th>
@@ -38,9 +42,9 @@
 
 
 </table>
-@{ 
+@{
     decimal totalPrice = 0;
-    foreach(var mov in Model)
+    foreach (var mov in Model)
     {
         totalPrice += mov.TotalPrice;
     }
