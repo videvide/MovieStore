@@ -38,14 +38,14 @@
             @Html.Partial("_LoginPartial")
         </div>
     </nav>
-    <div class="body-content">
+    <div class="body-content container">
         <div class="alert alert-warning bg-warning border-0 text-dark cart-alert" style="display: none; opacity: 0;" role="alert">
             Added! <br />
             @Html.ActionLink("Go to checkout.", "Index", "Cart", null, new { @class = " text-dark" })
         </div>
-        <div class="container">
-            @RenderBody()
-        </div>
+
+        @RenderBody()
+
         <footer>
             <div class="d-flex flex-row align-items-center justify-content-center">
                 <p class="text-warning m-0">&copy; @DateTime.Now.Year - LMDb</p>

@@ -9,9 +9,10 @@
     <div class="d-flex flex-column flex-md-row flex-sm-column bg-secondary shadow-sm" style="border-radius: 0 3rem 0 0">
         <img class="img-fluid h-auto w-100 mx-auto" style="max-width: 400px" src="@Model.Poster" alt="Movie Poster" />
         <div class="mx-2 mt-2">
-            <h2 class="text-white mb-3">@Html.DisplayFor(model => model.Title) <span class="badge badge-pill badge-dark" style="color: #e0e0e0;">@Model.Price :-</span></h2>
-            <div class="d-flex flex-row mb-2">
+            <h2 class="text-white mb-3 text-center text-md-left">@Html.DisplayFor(model => model.Title) <span class="badge badge-pill badge-dark" style="color: #e0e0e0;">@Model.Price :-</span></h2>
+            <div class="d-flex flex-row mb-2 justify-content-center justify-content-md-start">
                 <h6 class="card-subtitle mr-3 text-muted">IMDb Rating <span class="badge badge-warning">@Html.DisplayFor(model => model.ImdbRating)</span></h6>
+                <h6 class="card-subtitle mr-3 text-muted">Year <span class="badge badge-warning">@Html.DisplayFor(model => model.ReleaseYear)</span></h6>
                 <h6 class="card-subtitle mr-3 text-muted">Rated <span class="badge badge-warning">@Html.DisplayFor(model => model.Rated)</span></h6>
                 <h6 class="card-subtitle mr-3 text-muted">Genre <span class="badge badge-warning">@Html.DisplayFor(model => model.Genre)</span></h6>
             </div>
@@ -29,7 +30,7 @@
     }
 </div>
 
-    <script>
+<script>
     $(function () {
         $(".cart-alert").hide();
         $('#addToCartSubmitDetailsView@(Model.Id)').click(async function (e) {
@@ -59,5 +60,5 @@
             return false;
         });
     })
-    </script>
-    @*<a href="#" class="btn btn-outline-warning d-block shadow-sm" style="border-radius: 0 0 3rem 3rem">Add to cart</a>*@
+</script>
+@*<a href="#" class="btn btn-outline-warning d-block shadow-sm" style="border-radius: 0 0 3rem 3rem">Add to cart</a>*@

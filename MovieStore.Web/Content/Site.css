@@ -166,6 +166,10 @@ th {
     left: -5%;
 }
 
+#top-100-brand {
+    font-family: 'Audiowide', 'Segoe UI';
+}
+
 @media only screen and (max-width: 991px) {
     #brand-name {
         display: none;
@@ -180,14 +184,12 @@ th {
         margin-top: 2rem !important;
     }
 
-
-
     .body-content {
         margin-top: 3rem !important;
     }
 
     .card {
-/*        min-width: 45% !important;*/
+        min-width: 45% !important;
     }
 }
 
