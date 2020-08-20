@@ -24,16 +24,18 @@
 
         @foreach (var order in Model)
         {
-        <tr>
-            <td>@order.OrderDate</td>
-            <td>@order.Id</td>
-            <td>@Html.ActionLink("Order details", "OrderDetails", "Customer", new { id = order.Id}, null)</td>
-        </tr>
+            <tr>
+                <td>@order.OrderDate</td>
+                <td>@order.Id</td>
+                <td>@Html.ActionLink("Order details", "OrderDetails", "Customer", new { id = order.Id }, null)</td>
+            </tr>
         }
 
 
     </tbody>
 </table>
+
+     @Html.ActionLink("Back to user page ", "Index", "Manage", new { }, new {@class="text-Warning" })<i class="fas fa-door-open text-warning"></i>
 
 
 

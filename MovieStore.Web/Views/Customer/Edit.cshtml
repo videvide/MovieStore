@@ -3,7 +3,6 @@
 @{
     ViewBag.Title = "Edit";
 }
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -102,7 +101,4 @@
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back", "Index", "Manage")
-</div>
+@Html.ActionLink("Back to user page ", "Index", "Manage", new { }, new { @class = "text-Warning" })<i class="fas fa-door-open text-warning"></i>

@@ -4,4 +4,5 @@
 
 <h2>Customer Page</h2>
 
-@Html.ActionLink("Edit Data", "Edit", "Customer")
+@Html.ActionLink("Edit Data", "Edit", "Customer", new { }, new {@class="text-warning" }) | 
+@Html.ActionLink("Orders", "Orders", "Customer", new { }, new { @class = "text-warning" })
