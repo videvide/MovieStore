@@ -1,10 +1,10 @@
 ﻿@model MovieStore.Web.Models.MovieCartPartialViewModel
 
-<div class="col d-flex mb-4 bg-secondary pl-0">
-    <img class="img-fluid" style="max-width: 10vw;" src="@Model.Movie.Poster" alt="Card image cap">
+<div class="col-12 col-md-6 d-flex mb-4 bg-secondary pl-0">
+    <img class="img-fluid" style="max-width: 30%; height: auto;" src="@Model.Movie.Poster" alt="Card image cap">
     <div class="ml-4">
-        <h2 class="text-warning">@Model.Movie.Title</h2>
-        <h4 class="text-secondary">Price:<span class="text-light"> @Model.Movie.Price </span></h4>
+        <h3 class="text-warning">@Model.Movie.Title</h3>
+        <h6 class="text-secondary">Price:<span class="text-light"> @Model.Movie.Price </span></h6>
         <h6 class="text-secondary">Amount:<span class="text-light"> @Model.Count </span></h6>
         <h6 class="text-secondary">Total:<span class="text-light"> @Model.TotalPrice </span></h6>
     </div>
