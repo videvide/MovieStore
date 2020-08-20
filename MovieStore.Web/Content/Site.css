@@ -185,11 +185,28 @@ th {
     }
 
     .body-content {
-        margin-top: 3rem !important;
+        margin-top: 5rem !important;
     }
 
     .card {
         min-width: 45% !important;
+    }
+
+    .navbar-collapse ul li {
+        text-align: center;
+    }
+
+    input[name~="query"] {
+        width: unset;
+        margin-right: 0.5rem;
+    }
+
+    #cartBtn {
+        margin-bottom: 0.5rem;
+    }
+
+    form > ul li .dropdown-menu-right {
+        text-align: center;
     }
 }
 
