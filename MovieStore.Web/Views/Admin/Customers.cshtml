@@ -3,9 +3,10 @@
 @{
     ViewBag.Title = "Customers";
 }
-
-<h2>Customers</h2>
-
+<div class="mt-4 text-center">
+    <h2>Customers</h2>
+</div>
+<a href="@Url.Action("Index")">Back to Admin Page <i class="fas fa-door-open text-warning"></i></a>
 <table class="table">
     <tr>
         <th>
@@ -49,4 +50,4 @@
     }
 </table>
 
-<a href="@Url.Action("Index")">Back to Admin Page <i class="fas fa-door-open text-warning"></i></a>
+@Html.Partial("~/Views/Shared/_UpToTopBtnPartial.cshtml")

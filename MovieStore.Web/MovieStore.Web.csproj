@@ -425,6 +425,7 @@
     <Content Include="Views\Admin\Orders.cshtml" />
     <Content Include="Views\Shared\_Top100MoviePartial.cshtml" />
     <Content Include="Views\Shared\_MovieCheckOutPartial.cshtml" />
+    <Content Include="Views\Shared\_UpToTopBtnPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MovieStore.Lib\MovieStore.Lib.csproj">

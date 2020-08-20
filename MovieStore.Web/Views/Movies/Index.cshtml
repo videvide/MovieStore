@@ -10,6 +10,8 @@
 @*<p>
         @Html.ActionLink("Create New", "Create")
     </p>*@
+<a href="@Url.Action("Index", "Admin")">Back to Admin Page <i class="fas fa-door-open text-warning"></i></a>
+
 <table class="table">
     <tr>
         <th>
@@ -80,3 +82,6 @@
         </tr>
     }
 </table>
+
+    @Html.Partial("~/Views/Shared/_UpToTopBtnPartial.cshtml")
+
