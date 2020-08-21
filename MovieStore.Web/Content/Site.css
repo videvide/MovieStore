@@ -5,6 +5,7 @@
     padding-left: 15px;
     padding-right: 15px;
     padding-bottom: 2.5rem;
+    max-width: 100vw;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists
@@ -238,6 +239,6 @@ th {
 }*/
 
 .card {
-    max-width: 75%;
+    max-width: 90%;
 }
 
