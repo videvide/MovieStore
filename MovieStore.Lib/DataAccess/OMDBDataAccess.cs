@@ -11,7 +11,7 @@ namespace MovieStore.Lib.DataAccess
 {
     public class OMDBDataAccess
     {
-        private const string API_URI = "http://www.omdbapi.com/?apikey=56e90cf2&";
+        private const string API_URI = "http://www.omdbapi.com/?apikey={API_KEY}&";
         private readonly HttpClient _client;
 
         public OMDBDataAccess()
